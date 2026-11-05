@@ -10,7 +10,7 @@ Each player is an island god. On your turn you pick up a stack of earth, carry i
 
 ## Components
 
-- 1 board: a 6 × 7 hex sea with 5 sacred peaks, 14 pearl spots and 5 numbered start spaces, plus a dashed line marking the smaller 2–3 player sea. A score track runs around the edge.
+- 1 board: a 6 × 7 hex sea with 10 mountains printed on the corners where three spaces meet, 14 pearl spots and 5 numbered start spaces, plus a dashed line marking the smaller 2–3 player sea. A score track runs around the edge.
 - 50 earth discs: 10 each of 5 land types (lava, jungle, sand, coral, basalt).
 - 14 pearls worth 1–3.
 - Per player: 1 god, 7 shrines, 1 scoring cube and 1 player board with five 0–25 land tracks.
@@ -29,11 +29,12 @@ Each player is an island god. On your turn you pick up a stack of earth, carry i
 
 1. **Gather earth.** Top up the stack under your god to 2 discs of one land type from the supply. If the stack already has 2 or more, add 1.
 2. **Travel.** Lift the whole stack and move it one space at a time, in any direction, dropping the bottom disc on each space you enter.
-   - You can't cross a peak or enter the same space twice in a turn.
+   - You can't enter the same space twice in a turn. Mountains sit on corners, so they never block the way.
    - Your god lands last, on a space with no shrine.
 3. **Offerings.** A disc you drop on a rival's shrine stays on top of it. They move that land type's marker up 1, and you move your cube up 1 on the score track. A disc you drop on a stone shrine is also an offering: you score 1 and nobody's track moves.
 4. **Eruption (once per turn).** If your god lands on an unclaimed stack of 2 or more that contains your land type, the island erupts. Collect its top disc, add 1 disc of your land type, and travel again.
 5. **Raise a shrine.** Collect the top disc where your god lands, then slip a shrine under your god. If all your shrines are already out, move one of them here instead.
+6. **Seal mountains.** Each mountain touches exactly 3 spaces. The moment all 3 hold shrines, the mountain is sealed: whoever has the most shrines there takes it for 3 points. If players tie, nobody takes it. Once a mountain is sealed, the shrines around it are free to move on to the next one.
 
 **Collecting.** Each earth disc you collect moves that land type's marker up 1 on your player board, to a maximum of 25. The disc then goes back to the supply. Pearls you keep.
 
@@ -42,7 +43,7 @@ Each player is an island god. On your turn you pick up a stack of earth, carry i
 The game ends the moment a player can't gather earth because the supply has run dry. Then score:
 
 - **Land types:** for each land type, the furthest along that track scores 10 and a clear second scores 5. If players tie for the most, each of them scores 5.
-- **Sacred peaks:** 5 each, to the player with the most shrines around the peak. A tie scores nothing.
+- **Mountains:** 3 for each mountain you sealed and took. A mountain still open at the end goes to the player with the most shrines around it (a tie scores nothing).
 - **Pearls:** their printed value.
 - **Offerings:** 1 point per offering you made.
 - **Tiebreak:** most discs collected.
