@@ -52,7 +52,7 @@ header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;jus
 .hexinfo .coord{font-weight:700;color:var(--ink)}
 .dots{display:inline-flex;gap:3px;align-items:center}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:inset 0 -2px 0 rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.25)}
-.dot.core{background:radial-gradient(circle at 35% 30%, #fff3b8 0 14%, #f0b92a 42%, #a8740c 100%);box-shadow:0 0 0 1px #6e4a06}
+.dot.core{background:radial-gradient(circle at 35% 30%, #ffffff 0 20%, #efe9e0 50%, #b9b0c9 100%);box-shadow:0 0 0 1px #7d748c}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:6px 6px 0;font-size:12.5px;color:var(--ink-dim)}
 .app{max-width:1240px}
 @media (min-width:921px){.board-wrap{grid-column:1;grid-row:2}aside.console{grid-column:2;grid-row:2 / span 2}.refcard{grid-column:1;grid-row:3;margin-top:-10px}}
@@ -326,7 +326,7 @@ const ELEM_VAL = 10, PLANET_VAL = 5, MTN_VAL = 3;
 const TRENCHES = false, SEALING = false;   // playtest 3: open sea, peaks stay contested until the end
 const CORE = 5;
 const PCOL = [
-  {name:"Indigo", col:"#3d55b3", edge:"#1f2d6b"}, {name:"Ivory", col:"#f4efe2", edge:"#9c947f"}, {name:"Violet", col:"#8a54b8", edge:"#4e2a72"},
+  {name:"Indigo", col:"#3d55b3", edge:"#1f2d6b"}, {name:"Crimson", col:"#a8243a", edge:"#5c0f1d"}, {name:"Violet", col:"#8a54b8", edge:"#4e2a72"},
   {name:"Ochre", col:"#c8862a", edge:"#7a4d10"}, {name:"Ink", col:"#263238", edge:"#0b1013"},
 ];
 const BOT_NAMES = ["Tide","Gale","Ash","Reef","Ember"];
@@ -705,7 +705,7 @@ function stackSVG(c, s, i) {
     if (k === atk) { const pc = s.owner[i] === NEU ? {col: "#8e897c", edge: "#4a463d"} : PCOL[s.owner[i]]; y -= 1; out += hexPlateSVG(c.x, y, 14.5, 4.4, pc.col, pc.edge, pc.edge); if (s.owner[i] === NEU) out += `<ellipse cx="${c.x}" cy="${(y - 0.2).toFixed(1)}" rx="6.5" ry="2.4" fill="none" stroke="#d9d3c3" stroke-width="1.1" opacity=".85"/>`; y -= 4.4 - 1; }
     if (k < n) {
       const d = st[k];
-      if (d.c === CORE) { out += discSVG(c.x, y, 10.5, 4.2, step, "url(#gGold)", "#a8740c", "#6e4a06"); coreVal += d.v; }
+      if (d.c === CORE) { out += discSVG(c.x, y, 10.5, 4.2, step, "url(#gGold)", "#c4bccf", "#8a8198"); coreVal += d.v; }
       else { const e = ELEM[d.c]; out += discSVG(c.x, y, 10.5, 4.2, step, e.col, e.edge, e.edge); }
       y -= step;
     }
@@ -713,7 +713,7 @@ function stackSVG(c, s, i) {
   if (n && st[n - 1].c === CORE && atk !== n) out += `<ellipse cx="${(c.x - 3).toFixed(1)}" cy="${(y + step - 1.2).toFixed(1)}" rx="3" ry="1.1" fill="#fff6cf" opacity=".95"/>`;
   const tag = (x, y, txt, fill) => `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" fill="${fill}" stroke="${INK}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round">${txt}</text>`;
   if (n > 1) out += tag(c.x + 18, c.y + 6, n, CHALK);   // kept clear of the corners, where mountains sit
-  if (coreVal) out += `<circle cx="${(c.x - 17).toFixed(1)}" cy="${(c.y + 3).toFixed(1)}" r="6.2" fill="url(#gGold)" stroke="#6e4a06" stroke-width=".9"/><text x="${(c.x - 17).toFixed(1)}" y="${(c.y + 6.4).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="800" fill="#3d2802">${coreVal}</text>`;
+  if (coreVal) out += `<circle cx="${(c.x - 17).toFixed(1)}" cy="${(c.y + 3).toFixed(1)}" r="6.2" fill="url(#gGold)" stroke="#7d748c" stroke-width=".9"/><text x="${(c.x - 17).toFixed(1)}" y="${(c.y + 6.4).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="800" fill="#3d2802">${coreVal}</text>`;
   return out;
 }
 function startNumSVG(c, i, dim) {   // printed start space: a carved ring with its number; with N players, gods start on 1 to N
@@ -817,7 +817,7 @@ function render(dispState) {
   }
   if (UI.anim) trail = UI.anim.trail || "";
   svg.innerHTML = `<defs>
-    <radialGradient id="gGold" cx="38%" cy="32%" r="75%"><stop offset="0%" stop-color="#fff3b8"/><stop offset="35%" stop-color="#f0b92a"/><stop offset="100%" stop-color="#b8800f"/></radialGradient>
+    <radialGradient id="gGold" cx="38%" cy="32%" r="75%"><stop offset="0%" stop-color="#ffffff"/><stop offset="45%" stop-color="#f3eee6"/><stop offset="80%" stop-color="#d9d2e2"/><stop offset="100%" stop-color="#b9b0c9"/></radialGradient>
     <radialGradient id="gSea" cx="45%" cy="40%" r="75%"><stop offset="0%" stop-color="#4aa3b8"/><stop offset="60%" stop-color="#2f86a3"/><stop offset="100%" stop-color="#21677f"/></radialGradient>
     <radialGradient id="gTrench" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#103e55"/><stop offset="100%" stop-color="#18516a"/></radialGradient>
     <pattern id="pWave" width="34" height="22" patternUnits="userSpaceOnUse"><path d="M2 14 q4 -4 8 0 t8 0" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="1.2" stroke-linecap="round"/></pattern>
@@ -895,7 +895,7 @@ function heldSVG(c, discs, q, baseTop, lifted) {   // the stack your god carries
   const step = discs.length > 5 ? 2.4 : 3; let y = baseTop - (lifted ? 4 : 0), out = "";
   if (lifted) out += `<ellipse cx="${c.x}" cy="${(baseTop - 0.6).toFixed(1)}" rx="9" ry="2.6" fill="#0a2633" opacity=".25"/>`;
   for (const d of discs) {
-    if (d.c === CORE) out += discSVG(c.x, y, 9.5, 3.8, step, "url(#gGold)", "#a8740c", "#6e4a06");
+    if (d.c === CORE) out += discSVG(c.x, y, 9.5, 3.8, step, "url(#gGold)", "#c4bccf", "#8a8198");
     else { const e = ELEM[d.c]; out += discSVG(c.x, y, 9.5, 3.8, step, e.col, e.edge, e.edge); }
     y -= step;
   }
@@ -917,7 +917,7 @@ function trailSVG(e) {
     const c = cells[x];
     if (j === g.path.length - 1) { out += `<ellipse cx="${c.x}" cy="${c.y + 20}" rx="7" ry="3.2" fill="${PCOL[G.cur].col}" stroke="${PCOL[G.cur].edge}" stroke-width="1" pointer-events="none"/>`; return; }
     const d = hand[j]; const gift = D.owner[x] >= 0 && D.owner[x] !== G.cur;
-    out += (d.c === CORE ? `<circle cx="${c.x}" cy="${c.y + 20}" r="4.2" fill="url(#gGold)" stroke="#6e4a06" stroke-width="1.2" pointer-events="none"/>` : `<circle cx="${c.x}" cy="${c.y + 20}" r="4.2" fill="${ELEM[d.c].col}" stroke="${gift ? "#ff9b7a" : INK}" stroke-width="${gift ? 2 : 1.2}" pointer-events="none"/>`);
+    out += (d.c === CORE ? `<circle cx="${c.x}" cy="${c.y + 20}" r="4.2" fill="url(#gGold)" stroke="#7d748c" stroke-width="1.2" pointer-events="none"/>` : `<circle cx="${c.x}" cy="${c.y + 20}" r="4.2" fill="${ELEM[d.c].col}" stroke="${gift ? "#ff9b7a" : INK}" stroke-width="${gift ? 2 : 1.2}" pointer-events="none"/>`);
   });
   if (e.kind === "final" && e.m.target !== null) { const c = cells[e.m.target]; out += `<polygon points="${hexPoints(c.x, c.y, R - 4)}" fill="none" stroke="${PCOL[G.cur].col}" stroke-width="3" stroke-dasharray="5 3" pointer-events="none"/>`; }
   return out;
