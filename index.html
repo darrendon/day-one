@@ -52,7 +52,7 @@ header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;jus
 .hexinfo .coord{font-weight:700;color:var(--ink)}
 .dots{display:inline-flex;gap:3px;align-items:center}
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:inset 0 -2px 0 rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.25)}
-.dot.core{background:radial-gradient(circle at 35% 30%, #ffffff 0 20%, #efe9e0 50%, #b9b0c9 100%);box-shadow:0 0 0 1px #7d748c}
+.dot.core{background:radial-gradient(circle at 40% 35%, #ffffff 0 30%, #e9e4f2 70%, #b9b0c9 100%);border-radius:0;box-shadow:none;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);width:14px;height:14px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:6px 6px 0;font-size:12.5px;color:var(--ink-dim)}
 .app{max-width:1240px}
 @media (min-width:921px){.board-wrap{grid-column:1;grid-row:2}aside.console{grid-column:2;grid-row:2 / span 2}.refcard{grid-column:1;grid-row:3;margin-top:-10px}}
@@ -199,7 +199,7 @@ details.designer summary{cursor:pointer;font-weight:700}
   <header class="top">
     <div class="brand">
       <h1>Day One</h1>
-      <p>Raise islands out of an empty sea. Carry earth, drop a layer on every space you cross, and claim the land where your god comes to rest.</p>
+      <p>The world's first day. Young gods carry earth across an empty sea, raise the first islands, and win the favour of the sky before nightfall.</p>
     </div>
     <div class="top-actions">
       <button class="btn" id="btnRules" type="button">Rulebook</button>
@@ -216,8 +216,8 @@ details.designer summary{cursor:pointer;font-weight:700}
   <aside class="console">
     <div class="turncard" id="turnPanel"></div>
     <div class="turncard preview" id="previewPanel" hidden></div>
-    <div class="tray" role="group" aria-label="Supply">
-      <div class="traylab">Supply</div>
+    <div class="tray" role="group" aria-label="Earth of creation">
+      <div class="traylab">Earth of creation</div>
       <div class="supply" id="supply"></div>
     </div>
     <div class="mats" id="players"></div>
@@ -225,24 +225,24 @@ details.designer summary{cursor:pointer;font-weight:700}
     <details class="booklet"><summary>Game log</summary><ul class="log" id="log"></ul></details>
     <details class="booklet rules" id="rules">
         <summary>Rulebook</summary>
-        <p>Each player is an island god raising a new world out of an empty sea. Your god carries stacks of earth across the waves, drops a layer on every space it crosses, and plants shrines where it comes to rest.</p>
-        <p><strong>Setup:</strong> the board is a tight 6 × 7 sea with 10 mountains printed on the corners where three spaces meet (3 points each) and printed pearl spots (shuffle the 1–3 pearls onto them). With 2 or 3 players, play only inside the dashed zone and leave the shallows outside it empty. Pick any player colours. Each player takes a god, a scoring cube and their shrines (7 / 6 / 5 / 4 with 2 / 3 / 4 / 5 players). The board has 5 numbered start spaces: the first player starts on 1, the second on 2, and so on, with one shrine on the space and their god standing on it. Put a grey stone shrine on every numbered space nobody is using inside the play area (2 players: spaces 3 and 5; 3 players: space 5; 4 players: space 5; 5 players: none). Put earth discs of each of the 5 land types in the supply: 10 each with 4 or 5 players (the full box, 50 discs), 8 with 3, 7 with 2. Each player also takes a player board and puts a marker at 0 on each of its five land-type tracks.</p>
+        <p><em>Before the first dawn there was only sea. Then the young gods woke, and the sky gave them one day to make a world. Each god carries earth across the water, raises islands where it walks, and builds shrines to claim them. The sky watches: it favours gods who are generous with each other, and when night falls it crowns the masters of each land.</em></p>
+        <p><strong>Setup:</strong> the board is a 6 × 7 sea. Ten peak tiles sit on the printed marks where three spaces meet, and fallen stars (worth 1–3) are shuffled onto the star spots. With 2 or 3 players, play only inside the dashed line and leave the shallows outside it empty (no tiles or stars there). Pick any player colours. Each player takes a god, a favour cube and their shrines (7 / 6 / 5 / 4 with 2 / 3 / 4 / 5 players). The board has 5 numbered start spaces: the first player starts on 1, the second on 2, and so on, with one shrine on the space and their god standing on it. Put an elder altar (grey) on every numbered space nobody is using inside the play area (2 players: spaces 3 and 5; 3 or 4 players: space 5; 5 players: none). The earth of creation: 7 / 8 / 10 / 10 discs of each of the five lands (Fire, Forest, Shore, Reef, Stone) for 2 / 3 / 4 / 5 players. Each player takes a mastery board and puts a marker at 0 on each land's track.</p>
         <ol>
-          <li><strong>Gather earth:</strong> top up the stack under your god to 2 discs of one land type from the supply (if it already holds 2 or more, add 1). Your god stands on top. If your god can't travel from there, start from one of your other shrines instead.</li>
-          <li><strong>Travel:</strong> lift the whole stack and move it one space at a time, in any direction, dropping the bottom disc on each space you enter. You can't enter the same space twice in a turn. Mountains sit on corners, so they never block the way. Your god lands last, on a space with no shrine.</li>
-          <li><strong>Offerings:</strong> a disc that would drop onto a rival's shrine is an offering. Drop it on top of their shrine (their island grows). They move that land type's marker up 1 on their player board, and you move your cube 1 space along the score track. Pearls offered go straight to them. Give rivals what they don't need. A disc dropped on a stone shrine is an offering too: you score 1, nobody's track moves, and a pearl dropped there goes back to the box.</li>
-          <li><strong>Eruption (once per turn):</strong> if your god lands on a stack of 2 or more discs with no shrine, and at least one disc in it is the land type you took this turn, the island erupts. Collect its top disc, add 1 disc of your land type, and travel again.</li>
-          <li><strong>Raise a shrine:</strong> collect the top disc where your god lands (an empty space gives nothing), then slip a shrine under your god. If all your shrines are already on the sea, move one of them here instead; the stack it stood on stays behind.</li>
-          <li><strong>Seal mountains:</strong> each mountain touches exactly 3 spaces. The moment all 3 hold shrines, it is sealed: the player with the most shrines there takes the mountain tile off the board (3 points). If players tie, the tile goes back to the box. After that, those shrines are free to move on to the next mountain.</li>
+          <li><strong>Gather earth:</strong> top up the stack under your god to 2 discs of one land from the earth of creation (if it already holds 2 or more, add 1). Your god stands on top. If your god can't travel from there, start from one of your other shrines instead.</li>
+          <li><strong>Walk the sea:</strong> lift the whole stack and carry it one space at a time, in any direction, dropping the bottom disc on each space you enter. You can't enter the same space twice in a turn. Peaks stand on corners, so they never block the way. Your god comes to rest last, on a space with no shrine.</li>
+          <li><strong>Offerings:</strong> a disc that would drop onto a rival's shrine is an offering. It lands on top of their shrine (their island grows) and they move that land's marker up 1 on their mastery board. The sky rewards you: move your favour cube 1 step along the sun's path. A fallen star offered goes straight to them. Give rivals what they don't need. A disc dropped on an elder altar is an offering too: you gain 1 favour, nobody's mastery moves, and a star dropped there returns to the sky (the box).</li>
+          <li><strong>Surge (once per turn):</strong> if your god comes to rest on a stack of 2 or more discs with no shrine, and the stack holds the land you gathered this turn, that land surges under you. Collect its top disc, add 1 disc of your land, and walk again.</li>
+          <li><strong>Raise a shrine:</strong> collect the top disc where your god comes to rest (an empty space gives nothing), then slip a shrine under your god. If all your shrines are already on the sea, move one of them here instead; the stack it stood on stays behind.</li>
+          <li><strong>Name a peak:</strong> each peak touches exactly 3 spaces. The moment all 3 hold shrines, the god with the most shrines there names it and takes the peak tile off the board (3 points). If gods tie, nobody can agree on a name and the tile returns to the box. After that, those shrines are free to move on to the next peak.</li>
         </ol>
-        <p><strong>Collecting:</strong> whenever you collect an earth disc (the top disc where your god lands, or the top disc in an eruption), move that land type's marker up 1 on your player board (tracks stop at 25) and put the disc back in the supply. Pearls you keep.</p>
-        <p><strong>Game end (the sea is full):</strong> earth only leaves the supply for the sea, and only comes back when someone collects it, so the supply slowly empties as the islands grow. The game ends the moment a player cannot gather earth, because no land type in the supply has enough discs.</p>
+        <p><strong>Collecting:</strong> whenever you collect an earth disc (the top disc where your god comes to rest, or the top disc in a surge), move that land's marker up 1 on your mastery board (tracks stop at 25) and return the disc to the earth of creation. Stars you keep.</p>
+        <p><strong>Nightfall:</strong> earth only leaves the earth of creation for the sea, and only comes back when someone collects it, so it slowly runs out as the islands grow. Night falls the moment a god cannot gather earth, because no land has enough discs left. Then the sky crowns the masters:</p>
         <ul>
-          <li><strong>Land types:</strong> for each land type, the player furthest along that track scores 10 and the clear second scores 5. If players tie for the most, each of them scores 5 and there is no second place.</li>
-          <li><strong>Pearls</strong> score their printed value.</li>
-          <li><strong>Offerings:</strong> 1 point for every offering you made (your cube on the track).</li>
-          <li><strong>Mountains:</strong> 3 points for each mountain you sealed and took. A mountain still open at the end goes to the player with the most shrines around it (a tie scores nothing).</li>
-          <li><strong>Tiebreak:</strong> most discs collected.</li>
+          <li><strong>Mastery:</strong> for each land, the god furthest along its track scores 10 and the clear second scores 5. If gods tie for the most, each of them scores 5 and there is no second place.</li>
+          <li><strong>Fallen stars</strong> score their printed value.</li>
+          <li><strong>Favour:</strong> 1 point for every offering you made (your cube on the sun's path).</li>
+          <li><strong>Peaks:</strong> 3 points for each peak you named. A peak still unnamed at nightfall goes to the god with the most shrines around it (a tie scores nothing).</li>
+          <li><strong>Tiebreak:</strong> most earth collected.</li>
         </ul>
       </details>
   </aside>
@@ -273,14 +273,14 @@ details.designer summary{cursor:pointer;font-weight:700}
       <div class="grid2" style="margin-top:12px">
         <div class="field"><label for="optFill">Gather earth: fill your space to</label>
           <select id="optFill"><option value="2" selected>2 (fly 3)</option><option value="3">3 (fly 4)</option><option value="4">4 (fly 5)</option></select></div>
-        <div class="field"><label for="optCapture">Discs captured when you plant</label>
+        <div class="field"><label for="optCapture">Discs collected when you raise a shrine</label>
           <select id="optCapture"><option value="1" selected>1</option><option value="2">2</option></select></div>
         <div class="field"><label for="optBoard">Map</label>
-          <select id="optBoard"><option value="tight" selected>Tight sea, 6 × 7, offerings score (2–5 gods)</option><option value="8x9">Open sea, 8 × 9, previous rules (3–5 gods)</option></select></div>
+          <select id="optBoard"><option value="tight" selected>Day One sea, 6 × 7 (2–5 gods)</option><option value="8x9">Open sea, 8 × 9, previous rules (3–5 gods)</option></select></div>
         <div class="field"><label for="optSupply">Supply per land type (blank = by god count)</label><input id="optSupply" type="number" min="5" max="60" placeholder="by map and god count"></div>
         <div class="field"><label for="optOutposts">Shrines per god (blank = by god count, 0 = no limit)</label><input id="optOutposts" type="number" min="0" max="30" placeholder="6 / 5 / 4"></div>
-        <div class="field"><label for="optSpecials">Pearls</label><input id="optSpecials" type="number" min="0" max="30" value="14"></div>
-        <div class="field"><label for="optRelay">Eruptions per turn</label>
+        <div class="field"><label for="optSpecials">Fallen stars</label><input id="optSpecials" type="number" min="0" max="30" value="14"></div>
+        <div class="field"><label for="optRelay">Surges per turn</label>
           <select id="optRelay"><option value="0">0</option><option value="1" selected>1</option><option value="2">2</option></select></div>
         <div class="field"><label for="optBend">Movement</label>
           <select id="optBend"><option value="free" selected>Any direction, never the same space twice</option></select></div>
@@ -288,7 +288,7 @@ details.designer summary{cursor:pointer;font-weight:700}
         <div class="field"><label for="optSpeed">Animation</label>
           <select id="optSpeed"><option value="170">Normal</option><option value="70">Fast</option><option value="0">Instant</option></select></div>
       </div>
-      <p class="note" style="margin-top:10px">Defaults from bot testing: tight 6 × 7 sea with 10 corner mountains worth 3 (6 inside the 2–3 god zone) and 14 pearl spots (11 inside the zone), offerings score 1 for the giver and raise the receiver's island, collected discs go back to the supply and the game ends when the sea is full, 7 / 8 / 10 / 10 discs per land type with 2 / 3 / 4 / 5 gods, 7 / 6 / 5 / 4 shrines. The open-sea option keeps the previous rules: 8 × 9 with 7 peaks (worth 5, scored at the end for the most shrines around them), 14 pearls, 6 / 5 / 4 shrines per god with 3 / 4 / 5 gods, 5 land types with 27 discs each (23 with 3 gods), fill to 2, eruption on stacks of 2+ that contain the land type you took. Lands score 10 for the most and 5 for a clear second (tied for most: 5 each).</p>
+      <p class="note" style="margin-top:10px">Defaults from bot testing: 6 × 7 sea with 10 peaks worth 3 (6 inside the 2–3 god zone) and 14 fallen stars (11 inside the zone), offerings score 1 for the giver and raise the receiver's island, collected discs go back to the supply and night falls when the earth runs out, 7 / 8 / 10 / 10 discs per land type with 2 / 3 / 4 / 5 gods, 7 / 6 / 5 / 4 shrines. The open-sea option keeps the previous rules: 8 × 9 with 7 peaks (worth 5, scored at the end for the most shrines around them), 14 pearls, 6 / 5 / 4 shrines per god with 3 / 4 / 5 gods, 5 land types with 27 discs each (23 with 3 gods), fill to 2, surge on stacks of 2+ that contain the land type you took. Lands score 10 for the most and 5 for a clear second (tied for most: 5 each).</p>
     </details>
     <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
       <button class="btn" type="button" id="btnCancel">Cancel</button>
@@ -299,7 +299,7 @@ details.designer summary{cursor:pointer;font-weight:700}
 
 <div class="overlay" id="endScreen" hidden>
   <div class="modal">
-    <h3 id="endTitle">Game over</h3>
+    <h3 id="endTitle">Nightfall</h3>
     <p id="endReason"></p>
     <div class="tablewrap"><table class="final" id="finalTable"></table></div>
     <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
@@ -316,11 +316,11 @@ details.designer summary{cursor:pointer;font-weight:700}
 const R = 34, S3 = Math.sqrt(3);   // roomy hexes: corner mountains sit where three spaces meet
 const DIRS = [[1,0],[1,-1],[0,-1],[-1,0],[-1,1],[0,1]];
 const ELEM = [
-  {name:"Lava",   col:"#d4532b", edge:"#8e2e12", txt:"#ffffff"},
-  {name:"Jungle", col:"#3e8e4e", edge:"#22582d", txt:"#ffffff"},
-  {name:"Sand",   col:"#e9c66b", edge:"#a9862c", txt:"#1a1a1a"},
-  {name:"Coral",  col:"#ec8fa4", edge:"#b0566c", txt:"#1a1a1a"},
-  {name:"Basalt", col:"#5d6474", edge:"#2a2d35", txt:"#ffffff"},
+  {name:"Fire",   col:"#d4532b", edge:"#8e2e12", txt:"#ffffff"},
+  {name:"Forest", col:"#3e8e4e", edge:"#22582d", txt:"#ffffff"},
+  {name:"Shore",  col:"#e9c66b", edge:"#a9862c", txt:"#1a1a1a"},
+  {name:"Reef",   col:"#ec8fa4", edge:"#b0566c", txt:"#1a1a1a"},
+  {name:"Stone",  col:"#5d6474", edge:"#2a2d35", txt:"#ffffff"},
 ];
 const ELEM_VAL = 10, PLANET_VAL = 5, MTN_VAL = 3;
 const TRENCHES = false, SEALING = false;   // playtest 3: open sea, peaks stay contested until the end
@@ -329,7 +329,7 @@ const PCOL = [
   {name:"Indigo", col:"#3d55b3", edge:"#1f2d6b"}, {name:"Crimson", col:"#a8243a", edge:"#5c0f1d"}, {name:"Violet", col:"#8a54b8", edge:"#4e2a72"},
   {name:"Ochre", col:"#c8862a", edge:"#7a4d10"}, {name:"Ink", col:"#263238", edge:"#0b1013"},
 ];
-const BOT_NAMES = ["Tide","Gale","Ash","Reef","Ember"];
+const BOT_NAMES = ["Tide","Gale","Ash","Dawn","Ember"];
 const SHRINES = {2: 7, 3: 6, 4: 5, 5: 4};
 const INK = "#10242e", CHALK = "#fff7e3";
 const DEFAULT_SUPPLY = {3: 23, 4: 27, 5: 27};   // open sea (8 × 9)
@@ -611,7 +611,7 @@ function pickPull(s, p) {
 const orbit = i => (BOARD.mtn && BOARD.mtn[i]) || nbl[i].filter(x => !BOARD.planet[x]);
 const mtnsAt = x => BOARD.mtn ? Object.keys(BOARD.mtn).map(Number).filter(k => BOARD.mtn[k].includes(x)) : [];
 const peakKeys = () => Object.keys(BOARD.planetVal).map(Number).filter(k => (BOARD.mtn && BOARD.mtn[k]) || BOARD.planet[k] === 1);
-const pkName = k => BOARD.mtn && BOARD.mtn[k] ? "mountain " + BOARD.mtn[k].map(coord).join("/") : "peak " + coord(k);
+const pkName = k => BOARD.mtn && BOARD.mtn[k] ? "peak at " + BOARD.mtn[k].map(coord).join("/") : "peak " + coord(k);
 function orbitCounts(s, i) { const cnt = Array(s.P).fill(0); orbit(i).forEach(x => { if (s.owner[x] >= 0 && s.owner[x] < s.P) cnt[s.owner[x]]++; }); return cnt; }
 function orbitLeader(s, i) { const cnt = orbitCounts(s, i), mx = Math.max(...cnt); return mx > 0 && cnt.filter(v => v === mx).length === 1 ? cnt.indexOf(mx) : -2; }
 function score(s) {
@@ -675,7 +675,7 @@ let UI = idleUI("idle"); let LOG = []; let HAND = {c: 0};
 const $ = id => document.getElementById(id);
 const esc = t => String(t).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 const pname = p => esc(CFG.players[p].name);
-const discName = d => d.c === CORE ? `pearl (${d.v})` : ELEM[d.c].name;
+const discName = d => d.c === CORE ? `fallen star (${d.v})` : ELEM[d.c].name;
 const discDot = d => d.c === CORE ? `<span class="dot core"></span>` : `<span class="dot" style="background:${ELEM[d.c].col}"></span>`;
 
 /* ---------------- rendering ---------------- */
@@ -710,11 +710,15 @@ function stackSVG(c, s, i) {
       y -= step;
     }
   }
-  if (n && st[n - 1].c === CORE && atk !== n) out += `<ellipse cx="${(c.x - 3).toFixed(1)}" cy="${(y + step - 1.2).toFixed(1)}" rx="3" ry="1.1" fill="#fff6cf" opacity=".95"/>`;
+  if (n && st[n - 1].c === CORE && atk !== n) out += starSVG(c.x, y + step, 4.6, "#9a8fb0", .62);
   const tag = (x, y, txt, fill) => `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" fill="${fill}" stroke="${INK}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round">${txt}</text>`;
   if (n > 1) out += tag(c.x + 18, c.y + 6, n, CHALK);   // kept clear of the corners, where mountains sit
-  if (coreVal) out += `<circle cx="${(c.x - 17).toFixed(1)}" cy="${(c.y + 3).toFixed(1)}" r="6.2" fill="url(#gGold)" stroke="#7d748c" stroke-width=".9"/><text x="${(c.x - 17).toFixed(1)}" y="${(c.y + 6.4).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="800" fill="#3d2802">${coreVal}</text>`;
+  if (coreVal) out += starSVG(c.x - 17, c.y + 3.6, 7.6, "#7d748c") + starSVG(c.x - 17, c.y + 3.6, 6.4, "url(#gGold)") + `<text x="${(c.x - 17).toFixed(1)}" y="${(c.y + 6.8).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="7" font-weight="800" fill="${INK}" pointer-events="none">${coreVal}</text>`;
   return out;
+}
+function starSVG(x, y, r, fill, squash = 1) {   // a five-pointed star, flattened to sit on a disc face
+  let d = ""; for (let k = 0; k < 10; k++) { const a = -Math.PI / 2 + k * Math.PI / 5, rr = k % 2 ? r * .45 : r; d += (k ? "L" : "M") + (x + rr * Math.cos(a)).toFixed(1) + " " + (y + rr * Math.sin(a) * squash).toFixed(1); }
+  return `<path d="${d}Z" fill="${fill}" pointer-events="none"/>`;
 }
 function startNumSVG(c, i, dim) {   // printed start space: a carved ring with its number; with N players, gods start on 1 to N
   const k = TIGHT.startNums.indexOf(i); if (k < 0) return "";
@@ -729,7 +733,7 @@ function mountainSVG(k, t, st, dim) {   // a corner mountain: printed where its 
   const x = t.reduce((a, c) => a + cells[c].x, 0) / 3, y = t.reduce((a, c) => a + cells[c].y, 0) / 3;
   const sealed = st && st.sealed, w = st ? st.w : -1, gone = sealed && w < 0;
   const ring = sealed && w >= 0 ? PCOL[w].col : "#efe4c4", edge = sealed && w >= 0 ? PCOL[w].edge : "#7a6640";
-  let g = `<g opacity="${dim ? .4 : 1}"><title>${dim ? "Mountain (not in play)" : sealed ? (w >= 0 ? "Sealed: " + pname(w) + " took it (" + MTN_VAL + ")" : "Sealed in a tie: nobody took it") : "Mountain worth " + MTN_VAL + ": sealed when all 3 spaces around it hold shrines"}</title>`;
+  let g = `<g opacity="${dim ? .4 : 1}"><title>${dim ? "Peak (not in play)" : sealed ? (w >= 0 ? "Named by " + pname(w) + " (" + MTN_VAL + ")" : "Tied: nobody named it") : "Peak worth " + MTN_VAL + ": named when all 3 spaces around it hold shrines"}</title>`;
   g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9.5" fill="${ring}" stroke="${edge}" stroke-width="${sealed && w >= 0 ? 2.2 : 1.2}"/>`;
   g += `<path d="M${(x - 6.5).toFixed(1)} ${(y + 4).toFixed(1)} L${(x - 1.5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 1.2).toFixed(1)} ${(y - 1).toFixed(1)} L${(x + 3).toFixed(1)} ${(y - 3).toFixed(1)} L${(x + 6.5).toFixed(1)} ${(y + 4).toFixed(1)} Z" fill="${gone ? "#9aa29a" : "#5f7a52"}" stroke="#2f3d29" stroke-width=".8" stroke-linejoin="round"/>`;
   g += `<path d="M${(x - 3.2).toFixed(1)} ${(y - 2.5).toFixed(1)} L${(x - 1.5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 0.2).toFixed(1)} ${(y - 2.6).toFixed(1)} Z" fill="#f4f0e6"/>`;
@@ -868,10 +872,12 @@ function cubeSVG(x, y, q, a) {   // a small wooden cube marker, seen from above 
     `<path d="M${x} ${y + h} l${a / 2} ${h / 2} v${a * .55} l${-a / 2} ${-h / 2} Z" fill="${pc.edge}" stroke="${pc.edge}" stroke-width=".5" opacity=".85"/>` +
     `<path d="M${x + a / 2} ${y + 1.5 * h} l${a / 2} ${-h / 2} v${a * .55} l${-a / 2} ${h / 2} Z" fill="${pc.col}" stroke="${pc.edge}" stroke-width=".5" opacity=".9"/>`;
 }
+function mixC(a, b, t) { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const A = p(a), B = p(b); return "#" + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0")).join(""); }
 function trackSVG(s) {
   const {s: sz, out} = trackCells(), n = out.length; let g = "";
   out.forEach(([x, y], k) => {
-    g += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${sz}" height="${sz}" rx="3" fill="${k % 5 ? "#efe6cf" : "#e2d3ad"}" stroke="#b9a578" stroke-width=".8"/>`;
+    const t = k / (n - 1), sun = t < .5 ? mixC("#fbe7a6", "#f6d27a", t * 2) : mixC("#f2b98a", "#b9a6d6", (t - .5) * 2);
+    g += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${sz}" height="${sz}" rx="3" fill="${k % 5 ? sun : mixC(sun, "#a78b52", .28)}" stroke="#b9a578" stroke-width=".8"/>`;
     if (k % 5 === 0) g += `<text x="${(x + sz / 2).toFixed(1)}" y="${(y + 7.5).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="6.5" font-weight="800" fill="#7a6a43">${k}</text>`;
   });
   const gp = s.giftPts || [], at = {};
@@ -938,13 +944,13 @@ function renderLegend() {
   const sw = (w, h, vb, body) => `<svg width="${w}" height="${h}" viewBox="${vb}" aria-hidden="true">${body}</svg>`;
   $("legend").innerHTML = ELEM.map(e => `<span class="el"><span class="dot" style="background:${e.col}"></span><span>${e.name}</span></span>`).join("") +
     `<span class="el"><span>Each land type: most <b>10</b>, second <b>5</b> (tied for most: <b>5</b> each)</span></span>` +
-    `<span class="el"><span class="dot core"></span><span>Pearl <b>1–3</b></span></span>` +
+    `<span class="el"><span class="dot core"></span><span>Fallen star <b>1–3</b></span></span>` +
     `<span class="el">${sw(16, 22, "-8 -26 16 30", godSVG(0, 0, 0))}<span>God: stands on your newest shrine and travels from there</span></span>` +
     `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, PCOL[0].col, PCOL[0].edge, PCOL[0].edge))}<span>Shrine: claims the space under it</span></span>` +
-    (BOARD.mtn ? `<span class="el">${sw(20, 20, "-10 -10 20 20", `<circle r="9.5" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52"/>`)}<span>Mountain tile <b>${MTN_VAL}</b>: sits where 3 spaces meet. The moment all 3 hold shrines, the most shrines there takes the tile off the board (a tie: back to the box).</span></span>` : `<span class="el">${sw(18, 16, "-9 -9 18 16", `<ellipse cx="0" cy="3" rx="8.5" ry="4" fill="#e7d39b"/><path d="M-6 4 L-1 -7 L1 -4 L2.5 -6 L6 4 Z" fill="#5f7a52"/>`)}<span>Sacred peak <b>5</b>: at the end, the most shrines around it takes it (a tie scores nothing). Flag = current leader.</span></span>`) +
-    (CFG.giftPts ? `<span class="el">${sw(14, 14, "-1 -1 10 10", cubeSVG(0, 0, 0, 8))}<span>Score track: move your cube 1 space for every offering you make. Each space is a point.</span></span>` : "") +
+    (BOARD.mtn ? `<span class="el">${sw(20, 20, "-10 -10 20 20", `<circle r="9.5" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52"/>`)}<span>Peak <b>${MTN_VAL}</b>: stands where 3 spaces meet. The moment all 3 hold shrines, the god with the most shrines there names it and takes the tile (a tie: back to the box).</span></span>` : `<span class="el">${sw(18, 16, "-9 -9 18 16", `<ellipse cx="0" cy="3" rx="8.5" ry="4" fill="#e7d39b"/><path d="M-6 4 L-1 -7 L1 -4 L2.5 -6 L6 4 Z" fill="#5f7a52"/>`)}<span>Sacred peak <b>5</b>: at the end, the most shrines around it takes it (a tie scores nothing). Flag = current leader.</span></span>`) +
+    (CFG.giftPts ? `<span class="el">${sw(14, 14, "-1 -1 10 10", cubeSVG(0, 0, 0, 8))}<span>The sun's path: your favour cube moves 1 step for every offering you make. Each step is a point.</span></span>` : "") +
     (BOARD.tight ? `<span class="el">${sw(14, 15, "-7 -7.5 14 15", startBadge(0, 0, 1))}<span>Start spaces: first player on 1, second on 2, and so on. Player colours don't matter.</span></span>` +
-      `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, "#8e897c", "#4a463d", "#4a463d"))}<span>Stone shrine: on every numbered space nobody uses. Discs dropped on it are offerings (1 point to you).</span></span>` : "") +
+      `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, "#8e897c", "#4a463d", "#4a463d"))}<span>Elder altar: on every numbered space nobody uses. Discs dropped on it are offerings to the sky (1 favour to you).</span></span>` : "") +
     (BOARD.zoned ? `<span class="el"><span>Dashed line: with 2–3 gods, only spaces inside it are in play.</span></span>` : "");
 }
 function handControls() {
@@ -967,11 +973,11 @@ function shrineIcon(q, n) {   // the shrines a player still has in hand, as litt
 function renderPanels() {
   const sc = score(G); const p = G.cur, pl = CFG.players[p];
   let hint = "";
-  if (G.over) hint = "Game over.";
+  if (G.over) hint = "Night has fallen.";
   else if (pl.bot) hint = "Thinking…";
   else if (UI.mode === "pick") hint = "Your god can't travel from where it stands this turn, so pick one of your other shrines (outlined) to start from." ||  G.ship[p] < 0 ? "Launch from your start space." : (UI.legal.size && [...UI.legal].every(x => nbl[G.ship[p]].includes(x)) ? "Pick a space outlined in white, next to your god." : "You can't launch next to your god, so you can launch next to any of your shrines (outlined in white).");
-  else if (UI.mode === "aim" && UI.free && UI.F.phase === "fly" && !UI.clicks.length) hint = "Take earth from the supply (tap a pile), then move your god one space at a time. It carries the stack and drops the bottom disc on every space it enters.";
-  else if (UI.mode === "aim" && UI.free) hint = UI.F.phase === "pull" ? "You're out of shrines: pick one of yours to move under your god." : UI.F.phase === "fly" ? "Move one space at a time: tap a ringed space. Each step drops your bottom disc; a coral ring is a rival's shrine, so that disc becomes an offering. You can't enter the same space twice in a turn. Your god lands on the last step (spaces tinted in your colour), where you raise a shrine." : UI.F.phase === "target" ? "That space is taken. Plant on one of the highlighted neighbouring stacks." : "Check the plan, then go.";
+  else if (UI.mode === "aim" && UI.free && UI.F.phase === "fly" && !UI.clicks.length) hint = "Take earth of creation (tap a pile), then walk your god one space at a time. It carries the stack and drops the bottom disc on every space it enters.";
+  else if (UI.mode === "aim" && UI.free) hint = UI.F.phase === "pull" ? "You're out of shrines: pick one of yours to move under your god." : UI.F.phase === "fly" ? "Move one space at a time: tap a ringed space. Each step drops your bottom disc; a coral ring is a rival's shrine or an elder altar, so that disc becomes an offering. You can't enter the same space twice in a turn. Your god comes to rest on the last step (spaces tinted in your colour), where you raise a shrine." : UI.F.phase === "target" ? "That space is taken. Plant on one of the highlighted neighbouring stacks." : "Check the plan, then go.";
   else if (UI.mode === "aim") hint = (UI.stage ? `Launching again from ${coord(UI.origin)}: pick any heading. ` : "") + "Rings mark where your god can land. ↻ lands on a stack and launches it again; a filled ring raises a shrine. Discs ringed in red are offerings to rivals.";
   const showHand = !G.over && !pl.bot && (UI.mode === "pick" || (UI.mode === "aim" && (UI.free ? !UI.clicks.length : UI.stage === 0)));
   $("turnPanel").innerHTML = `<span class="round">Round ${G.round} · turn ${G.turns + 1}</span>
@@ -986,14 +992,14 @@ function renderPanels() {
   if (showHand) document.querySelectorAll("#supply [data-el]").forEach(b => b.onclick = () => { HAND.c = +b.dataset.el; refreshHand(); });
   $("players").innerHTML = CFG.players.map((pp, q) => {
     const won = Object.keys(G.sealed).filter(k => +k >= 100 && G.sealed[k] === q).length, left = CFG.outposts ? Math.max(0, CFG.outposts - G.outs[q].length) : 0;
-    return `<section class="mat${q === G.cur && !G.over ? " active" : ""}" style="--pc:${PCOL[q].col};--pe:${PCOL[q].edge}" aria-label="${esc(pp.name)}'s player board">
+    return `<section class="mat${q === G.cur && !G.over ? " active" : ""}" style="--pc:${PCOL[q].col};--pe:${PCOL[q].edge}" aria-label="${esc(pp.name)}'s mastery board">
       <div class="mathead">${godIcon(q, 26)}<span class="pname">${esc(pp.name)}${pp.bot ? " <small>bot</small>" : ""}</span>${q === G.cur && !G.over ? '<span class="turnflag">Turn</span>' : ""}<span class="ptotal" title="Score so far">${sc.total[q]}</span></div>
       ${CFG.recycle ? `<div class="pboard">${playerBoardSVG(q)}</div>` : ""}
       <div class="tableau">
-        <span class="tok" title="Pearls"><span class="dot core"></span><b>${G.cores[q]}</b></span>
-        <span class="tok" title="Mountain tiles taken">${won ? Array.from({length: won}, () => mtnTileSVG()).join("") : '<span class="none">no mountains</span>'}</span>
+        <span class="tok" title="Fallen stars"><span class="dot core"></span><b>${G.cores[q]}</b></span>
+        <span class="tok" title="Peaks named">${won ? Array.from({length: won}, () => mtnTileSVG()).join("") : '<span class="none">no peaks yet</span>'}</span>
         <span class="tok" title="Shrines still in hand">${CFG.outposts ? (left ? shrineIcon(q, left) : '<span class="none">all shrines out</span>') : ""}</span>
-        <span class="tok" title="Offerings made (cube on the score track)"><b>${sc.gp[q] || 0}</b>&nbsp;offerings</span>
+        <span class="tok" title="Favour: offerings made (cube on the sun's path)"><b>${sc.gp[q] || 0}</b>&nbsp;favour</span>
       </div>
     </section>`; }).join("");
   $("log").innerHTML = LOG.slice(-40).reverse().map(l => `<li><span class="t">${l.t}</span><span>${l.html}</span></li>`).join("");
@@ -1034,7 +1040,7 @@ function renderPreview(scBefore) {
         ${UI.stage === 0 ? `<dt>You add</dt><dd>${m.k} ${ELEM[m.c].name}</dd>` : ""}
         <dt>Spaces flown</dt><dd>${e.seg.path.length}${UI.stage ? ` (${m.drops} this turn)` : ""}</dd>
         <dt>God lands, shrine on</dt><dd>${m.target !== null ? coord(m.target) + (m.target !== m.final ? " (next to " + coord(m.final) + ")" : "") : "nowhere to plant"}</dd>
-        <dt>Captures</dt><dd>${r.captured.length ? r.captured.map(x => discDot(x) + " " + discName(x)).join(", ") : "nothing"}</dd>
+        <dt>Collects</dt><dd>${r.captured.length ? r.captured.map(x => discDot(x) + " " + discName(x)).join(", ") : "nothing"}</dd>
         <dt>Offerings to rivals</dt><dd>${r.gifts}</dd>
         ${r.seals.length ? `<dt>Seals</dt><dd>${r.seals.map(x => `${pkName(x.i)} → ${x.w >= 0 ? pname(x.w) : "tie, nobody"}`).join("<br>")}</dd>` : ""}
         <dt>Your score</dt><dd>${scBefore.total[p]} → ${sa.total[p]} (${d >= 0 ? "+" : ""}${d})</dd>
@@ -1054,10 +1060,10 @@ function renderFreePanel(scBefore) {
     box.innerHTML = `<h2>Ready to raise your shrine</h2>
       <dl>
         <dt>Starts from</dt><dd>${coord(m.o)}</dd>
-        <dt>You add</dt><dd>${m.k}${m.segs.length > 1 ? ` + ${UI.F.refill} on the eruption` : ""} ${ELEM[m.c].name}</dd>
-        <dt>Spaces crossed</dt><dd>${m.drops}${m.segs.length > 1 ? ` (eruption at ${coord(m.segs[1].from)})` : ""}</dd>
+        <dt>You add</dt><dd>${m.k}${m.segs.length > 1 ? ` + ${UI.F.refill} on the surge` : ""} ${ELEM[m.c].name}</dd>
+        <dt>Spaces crossed</dt><dd>${m.drops}${m.segs.length > 1 ? ` (surge at ${coord(m.segs[1].from)})` : ""}</dd>
         <dt>God lands, shrine on</dt><dd>${m.target !== null ? coord(m.target) + (m.target !== m.final ? " (next to " + coord(m.final) + ")" : "") : "nowhere to plant"}</dd>
-        <dt>Captures</dt><dd>${r.captured.length ? r.captured.map(x => discDot(x) + " " + discName(x)).join(", ") : "nothing"}</dd>
+        <dt>Collects</dt><dd>${r.captured.length ? r.captured.map(x => discDot(x) + " " + discName(x)).join(", ") : "nothing"}</dd>
         <dt>Offerings to rivals</dt><dd>${r.gifts}</dd>
         ${r.pulled !== null ? `<dt>Shrine moved from</dt><dd>${coord(r.pulled)}</dd>` : ""}
         ${r.seals.length ? `<dt>Seals</dt><dd>${r.seals.map(x => `${pkName(x.i)} → ${x.w >= 0 ? pname(x.w) : "tie, nobody"}`).join("<br>")}</dd>` : ""}
@@ -1071,10 +1077,10 @@ function renderFreePanel(scBefore) {
     const carry = F.phase === "fly" ? F.hand.slice(F.path.length).map(discDot).join("") + `<span class="dot" style="background:${PCOL[p].col};box-shadow:0 0 0 1.5px ${PCOL[p].edge}"></span>` : "";
     const next = F.phase === "pull" ? `All ${CFG.outposts} of your shrines are out. Pick one of them (outlined in amber) to move under your god at ${coord(F.target)}. Its stack stays behind, unclaimed.`
       : F.phase === "target" ? `Your god reached ${coord(F.final)}, which is taken. Pick a highlighted neighbouring stack to plant on.`
-      : left === 1 ? "Next step: your god lands. Land on a stack of 2 or more with no shrine" + (F.relays < CFG.relay ? " containing " + ELEM[HAND.c].name + " to make it erupt: you take its top disc, add 1 of your land type and fly again" : " to collect its top disc") + ". A single disc is taken; an empty space gives nothing."
+      : left === 1 ? "Next step: your god comes to rest. Rest on a stack of 2 or more with no shrine" + (F.relays < CFG.relay ? " holding " + ELEM[HAND.c].name + " and it surges: you take its top disc, add 1 of your land and walk again" : " to collect its top disc") + ". A single disc is taken; an empty space gives nothing."
       : `Next step drops ${discDot(F.hand[F.path.length])} ${discName(F.hand[F.path.length])}.`;
-    box.innerHTML = `<h2>${F.relays ? "Eruption!" : "Travelling"}</h2>
-      ${F.relays ? `<div class="delta">You took ${discDot(F.bonusCap)} ${discName(F.bonusCap)} and added ${F.refill} ${ELEM[HAND.c].name}. Travel again.</div>` : ""}
+    box.innerHTML = `<h2>${F.relays ? "The land surges!" : "Walking the sea"}</h2>
+      ${F.relays ? `<div class="delta">You took ${discDot(F.bonusCap)} ${discName(F.bonusCap)} and added ${F.refill} ${ELEM[HAND.c].name}. Walk again.</div>` : ""}
       ${F.phase === "fly" ? `<div class="steps"><span>Steps left <b>${left}</b></span><span>Offerings <b>${F.gifts}</b></span></div>` : ""}
       <div class="delta">${next}</div>
       <div class="row">${btns}</div>`;
@@ -1168,7 +1174,7 @@ function launchStage(e) {
   animate(view, e.seg.from, steps.concat(sub), () => {
     UI = idleUI("aim"); UI.all = keep.all; UI.prefix = keep.prefix.concat([e.seg]); UI.stage = keep.stage + 1;
     UI.origin = e.end; UI.legal = new Set([e.end]); UI.disp = finalD; UI.dispBefore = clone(finalD);
-    addLog(`${CFG.players[G.cur].name === "You" ? "Your" : pname(G.cur) + "'s"} god landed on the stack at ${coord(e.end)}: eruption.`);
+    addLog(`${CFG.players[G.cur].name === "You" ? "Your" : pname(G.cur) + "'s"} god came to rest on the stack at ${coord(e.end)}: it surges.`);
     buildStage(); renderAll();
   });
 }
@@ -1189,9 +1195,9 @@ function startTurn() {
 function commit(m) {
   const p = G.cur; const res = applyMove(G, p, m, true);
   const desc = `${pname(p)} added ${m.k} ${ELEM[m.c].name} at ${coord(m.o)} and flew ${m.drops} space${m.drops === 1 ? "" : "s"}` +
-    (m.segs.length > 1 ? `, eruption from ${coord(m.segs[1].from)}` : "") +
+    (m.segs.length > 1 ? `, surge from ${coord(m.segs[1].from)}` : "") +
     (m.target !== null ? `, shrine on ${coord(m.target)}` : ", nowhere to plant") + (res.pulled !== null ? ` (moved from ${coord(res.pulled)})` : "") +
-    (res.captured.length ? `, captured ${res.captured.map(discName).join(" and ")}` : (m.target !== null ? ", captured nothing" : "")) + (res.gifts ? `, offered ${res.gifts}` : "") + ".";
+    (res.captured.length ? `, collected ${res.captured.map(discName).join(" and ")}` : (m.target !== null ? ", collected nothing" : "")) + (res.gifts ? `, offered ${res.gifts}` : "") + ".";
   if (UI.free) { G = res.ns; G.turns++; addLog(desc); logSeals(res.seals); advance(); return; }
   const k = UI.mode === "aim" ? UI.stage : 0;
   let steps = res.steps, D;
@@ -1204,7 +1210,7 @@ function commit(m) {
   });
 }
 function logSeals(seals) {
-  for (const x of seals) addLog(x.w >= 0 ? `The ${pkName(x.i)} is sealed: ${pname(x.w)} takes it (${BOARD.planetVal[x.i]}).` : `The ${pkName(x.i)} is sealed in a tie: nobody takes it.`);
+  for (const x of seals) addLog(x.w >= 0 ? `${pname(x.w)} names the ${pkName(x.i)} (${BOARD.planetVal[x.i]}).` : `The ${pkName(x.i)} is ringed in a tie: nobody names it.`);
 }
 function advance() { G.cur = (G.cur + 1) % G.P; if (G.cur === 0) G.round++; startTurn(); }
 function animate(D, startIdx, steps, done) {
@@ -1249,10 +1255,10 @@ function finish() {
   const key = q => sc.total[q] * 1000 + G.caps[q];
   const order = CFG.players.map((_, q) => q).sort((a, b) => key(b) - key(a));
   const best = key(order[0]); const winners = order.filter(q => key(q) === best);
-  const tieNote = order.length > 1 && sc.total[order[0]] === sc.total[order[1]] && winners.length === 1 ? " (tiebreak: most captured discs)" : "";
-  $("endTitle").textContent = winners.length > 1 ? "A shared victory" : `${CFG.players[winners[0]].name} ${CFG.players[winners[0]].name === "You" ? "rule" : "rules"} the sea${tieNote}`;
-  $("endReason").textContent = `${CFG.players[G.ender].name} could not travel in round ${G.round}, so the game ends.`;
-  $("finalTable").innerHTML = `<tr><th>God</th><th>Lands</th><th>Pearls</th><th>Mountains</th>${CFG.giftPts ? "<th>Offerings</th>" : ""}<th>Captured</th><th>Total</th></tr>` +
+  const tieNote = order.length > 1 && sc.total[order[0]] === sc.total[order[1]] && winners.length === 1 ? " (tiebreak: most earth collected)" : "";
+  $("endTitle").textContent = winners.length > 1 ? "A shared victory" : `${CFG.players[winners[0]].name} ${CFG.players[winners[0]].name === "You" ? "are" : "is"} crowned by the sky${tieNote}`;
+  $("endReason").textContent = `Night falls: ${CFG.players[G.ender].name} could not gather earth in round ${G.round}, and Day One is over.`;
+  $("finalTable").innerHTML = `<tr><th>God</th><th>Mastery</th><th>Stars</th><th>Peaks</th>${CFG.giftPts ? "<th>Favour</th>" : ""}<th>Collected</th><th>Total</th></tr>` +
     order.map(q => `<tr class="${key(q) === best ? "win" : ""}"><td><span class="el"><span class="pchip" style="width:14px;height:14px;background:${PCOL[q].col}"></span>${pname(q)}</span></td><td>${sc.el[q]}</td><td>${G.cores[q]}</td><td>${sc.pl[q]}</td>${CFG.giftPts ? `<td>${sc.gp[q]}</td>` : ""}<td>${G.caps[q]}</td><td><b>${sc.total[q]}</b></td></tr>`).join("");
   $("endScreen").hidden = false;
 }
@@ -1290,7 +1296,7 @@ $("board").addEventListener("pointerover", e => {
   } else {
     const st = s.st[i];
     html += st.length ? `<span class="dots">${st.map(d => discDot(d)).join("")}</span><span>${st.map(discName).join(", ")} (bottom → top)</span>` : "<span>Empty space</span>";
-    if (s.owner[i] === NEU) html += `<span>Stone shrine: nobody's. A disc dropped here is an offering (1 point to you) and stays on top.</span>`;
+    if (s.owner[i] === NEU) html += `<span>Elder altar: a disc dropped here is an offering to the sky (1 favour to you) and stays on top.</span>`;
     else if (s.owner[i] >= 0) html += `<span>Shrine: ${pname(s.owner[i])}${s.ship[s.owner[i]] === i ? " (god here)" : ""}</span>`;
   }
   $("hexinfo").innerHTML = html;
