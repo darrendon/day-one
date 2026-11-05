@@ -710,7 +710,8 @@ function stackSVG(c, s, i) {
       y -= step;
     }
   }
-  if (n && st[n - 1].c === CORE && atk !== n) out += starSVG(c.x, y + step, 4.6, "#9a8fb0", .62);
+  const topStar = n && st[n - 1].c === CORE && atk !== n ? st[n - 1].v : 0;
+  if (topStar) { const fy = y + step; out += starSVG(c.x, fy, 6.4, "#7d6f9c", .66) + `<text x="${c.x.toFixed(1)}" y="${(fy + 2.3).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="6.4" font-weight="800" fill="#ffffff" pointer-events="none">${topStar}</text>`; coreVal -= topStar; }
   const tag = (x, y, txt, fill) => `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" fill="${fill}" stroke="${INK}" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round">${txt}</text>`;
   if (n > 1) out += tag(c.x + 18, c.y + 6, n, CHALK);   // kept clear of the corners, where mountains sit
   if (coreVal) out += starSVG(c.x - 17, c.y + 3.6, 7.6, "#7d748c") + starSVG(c.x - 17, c.y + 3.6, 6.4, "url(#gGold)") + `<text x="${(c.x - 17).toFixed(1)}" y="${(c.y + 6.8).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="7" font-weight="800" fill="${INK}" pointer-events="none">${coreVal}</text>`;
@@ -729,15 +730,20 @@ function startNumSVG(c, i, dim) {   // printed start space: a carved ring with i
 function startBadge(x, y, n) {   // a carved stone tablet (not a coin, so it can't be mistaken for a pearl or a peak value)
   return `<rect x="${(x - 6).toFixed(1)}" y="${(y - 6.5).toFixed(1)}" width="12" height="13" rx="2.4" fill="#3b3428" stroke="#e9dfc6" stroke-width="1.1"/><text x="${x.toFixed(1)}" y="${(y + 3.7).toFixed(1)}" text-anchor="middle" font-family="Lilita One, sans-serif" font-size="10.5" fill="#f4ecd8">${n}</text>`;
 }
+function peakTile(x, y, v, opts = {}) {   // a small square tile: the points printed above a mountain
+  const h = 8, X = d => (x + d).toFixed(1), Y = d => (y + d).toFixed(1);
+  return `<rect x="${X(-h)}" y="${Y(-h + 1.3)}" width="${2 * h}" height="${2 * h}" rx="3" fill="#a48a58"/>` +
+    `<rect x="${X(-h)}" y="${Y(-h)}" width="${2 * h}" height="${2 * h}" rx="3" fill="${opts.fill || "#f1e6c6"}" stroke="${opts.edge || "#7a6640"}" stroke-width="1"/>` +
+    `<path d="M${X(-6)} ${Y(6.2)} L${X(-2)} ${Y(-0.2)} L${X(0.4)} ${Y(3)} L${X(2.2)} ${Y(1)} L${X(6)} ${Y(6.2)} Z" fill="${opts.grey ? "#9aa29a" : "#5f7a52"}" stroke="#2f3d29" stroke-width=".7" stroke-linejoin="round"/>` +
+    `<path d="M${X(-3.4)} ${Y(2)} L${X(-2)} ${Y(-0.2)} L${X(-0.6)} ${Y(1.9)} Z" fill="#f4f0e6"/>` +
+    `<text x="${X(0)}" y="${Y(-1.6)}" text-anchor="middle" font-family="Lilita One, sans-serif" font-size="8.6" fill="${INK}">${v}</text>`;
+}
 function mountainSVG(k, t, st, dim) {   // a corner mountain: printed where its three spaces meet
   const x = t.reduce((a, c) => a + cells[c].x, 0) / 3, y = t.reduce((a, c) => a + cells[c].y, 0) / 3;
   const sealed = st && st.sealed, w = st ? st.w : -1, gone = sealed && w < 0;
   const ring = sealed && w >= 0 ? PCOL[w].col : "#efe4c4", edge = sealed && w >= 0 ? PCOL[w].edge : "#7a6640";
   let g = `<g opacity="${dim ? .4 : 1}"><title>${dim ? "Peak (not in play)" : sealed ? (w >= 0 ? "Named by " + pname(w) + " (" + MTN_VAL + ")" : "Tied: nobody named it") : "Peak worth " + MTN_VAL + ": named when all 3 spaces around it hold shrines"}</title>`;
-  g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9.5" fill="${ring}" stroke="${edge}" stroke-width="${sealed && w >= 0 ? 2.2 : 1.2}"/>`;
-  g += `<path d="M${(x - 6.5).toFixed(1)} ${(y + 4).toFixed(1)} L${(x - 1.5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 1.2).toFixed(1)} ${(y - 1).toFixed(1)} L${(x + 3).toFixed(1)} ${(y - 3).toFixed(1)} L${(x + 6.5).toFixed(1)} ${(y + 4).toFixed(1)} Z" fill="${gone ? "#9aa29a" : "#5f7a52"}" stroke="#2f3d29" stroke-width=".8" stroke-linejoin="round"/>`;
-  g += `<path d="M${(x - 3.2).toFixed(1)} ${(y - 2.5).toFixed(1)} L${(x - 1.5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 0.2).toFixed(1)} ${(y - 2.6).toFixed(1)} Z" fill="#f4f0e6"/>`;
-  if (gone) g += `<path d="M${(x - 5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 5).toFixed(1)} ${(y + 5).toFixed(1)} M${(x + 5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x - 5).toFixed(1)} ${(y + 5).toFixed(1)}" stroke="${INK}" stroke-width="1.8" stroke-linecap="round" opacity=".75"/>`;
+  g += peakTile(x, y, MTN_VAL, {grey: gone});
   return g + `</g>`;
 }
 function mountainsSVG(s) {   // printed corner marks everywhere; a mountain tile sits on each mark in play until it is sealed and taken away
@@ -751,7 +757,7 @@ function mountainsSVG(s) {   // printed corner marks everywhere; a mountain tile
   return g;
 }
 function mtnTileSVG(w) {   // a mountain tile as it sits on a player mat
-  return `<svg viewBox="-11 -11 22 22" width="22" height="22" aria-hidden="true"><circle r="10" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52" stroke="#2f3d29" stroke-width=".8" stroke-linejoin="round"/><path d="M-3.2 -2.5 L-1.5 -5 L.2 -2.6 Z" fill="#f4f0e6"/></svg>`;
+  return `<svg viewBox="-9.5 -9.5 19 20.5" width="20" height="21" aria-hidden="true">${peakTile(0, 0, MTN_VAL)}</svg>`;
 }
 function render(dispState) {
   const s = dispState || UI.disp || G; const svg = $("board");
@@ -947,7 +953,7 @@ function renderLegend() {
     `<span class="el"><span class="dot core"></span><span>Fallen star <b>1–3</b></span></span>` +
     `<span class="el">${sw(16, 22, "-8 -26 16 30", godSVG(0, 0, 0))}<span>God: stands on your newest shrine and travels from there</span></span>` +
     `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, PCOL[0].col, PCOL[0].edge, PCOL[0].edge))}<span>Shrine: claims the space under it</span></span>` +
-    (BOARD.mtn ? `<span class="el">${sw(20, 20, "-10 -10 20 20", `<circle r="9.5" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52"/>`)}<span>Peak <b>${MTN_VAL}</b>: stands where 3 spaces meet. The moment all 3 hold shrines, the god with the most shrines there names it and takes the tile (a tie: back to the box).</span></span>` : `<span class="el">${sw(18, 16, "-9 -9 18 16", `<ellipse cx="0" cy="3" rx="8.5" ry="4" fill="#e7d39b"/><path d="M-6 4 L-1 -7 L1 -4 L2.5 -6 L6 4 Z" fill="#5f7a52"/>`)}<span>Sacred peak <b>5</b>: at the end, the most shrines around it takes it (a tie scores nothing). Flag = current leader.</span></span>`) +
+    (BOARD.mtn ? `<span class="el">${sw(20, 21, "-9.5 -9.5 19 20.5", peakTile(0, 0, MTN_VAL))}<span>Peak <b>${MTN_VAL}</b>: stands where 3 spaces meet. The moment all 3 hold shrines, the god with the most shrines there names it and takes the tile (a tie: back to the box).</span></span>` : `<span class="el">${sw(18, 16, "-9 -9 18 16", `<ellipse cx="0" cy="3" rx="8.5" ry="4" fill="#e7d39b"/><path d="M-6 4 L-1 -7 L1 -4 L2.5 -6 L6 4 Z" fill="#5f7a52"/>`)}<span>Sacred peak <b>5</b>: at the end, the most shrines around it takes it (a tie scores nothing). Flag = current leader.</span></span>`) +
     (CFG.giftPts ? `<span class="el">${sw(14, 14, "-1 -1 10 10", cubeSVG(0, 0, 0, 8))}<span>The sun's path: your favour cube moves 1 step for every offering you make. Each step is a point.</span></span>` : "") +
     (BOARD.tight ? `<span class="el">${sw(14, 15, "-7 -7.5 14 15", startBadge(0, 0, 1))}<span>Start spaces: first player on 1, second on 2, and so on. Player colours don't matter.</span></span>` +
       `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, "#8e897c", "#4a463d", "#4a463d"))}<span>Elder altar: on every numbered space nobody uses. Discs dropped on it are offerings to the sky (1 favour to you).</span></span>` : "") +
