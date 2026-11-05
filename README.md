@@ -10,10 +10,11 @@ Each player is an island god. On your turn you pick up a stack of earth, carry i
 
 ## Components
 
-- 1 board: a 6 × 7 hex sea with 10 mountains printed on the corners where three spaces meet, 14 pearl spots and 5 numbered start spaces, plus a dashed line marking the smaller 2–3 player sea. A score track runs around the edge.
+- 1 board: a 6 × 7 hex sea with 10 printed corner marks where three spaces meet (a mountain tile sits on each one in play), 14 pearl spots and 5 numbered start spaces, plus a dashed line marking the smaller 2–3 player sea. A score track runs around the edge.
 - 50 earth discs: 10 each of 5 land types (lava, jungle, sand, coral, basalt).
 - 14 pearls worth 1–3.
 - Per player: 1 god, 7 shrines, 1 scoring cube and 1 player board with five 0–25 land tracks.
+- 10 mountain tiles.
 - 2 grey stone shrines.
 
 ## Setup
@@ -34,7 +35,7 @@ Each player is an island god. On your turn you pick up a stack of earth, carry i
 3. **Offerings.** A disc you drop on a rival's shrine stays on top of it. They move that land type's marker up 1, and you move your cube up 1 on the score track. A disc you drop on a stone shrine is also an offering: you score 1 and nobody's track moves.
 4. **Eruption (once per turn).** If your god lands on an unclaimed stack of 2 or more that contains your land type, the island erupts. Collect its top disc, add 1 disc of your land type, and travel again.
 5. **Raise a shrine.** Collect the top disc where your god lands, then slip a shrine under your god. If all your shrines are already out, move one of them here instead.
-6. **Seal mountains.** Each mountain touches exactly 3 spaces. The moment all 3 hold shrines, the mountain is sealed: whoever has the most shrines there takes it for 3 points. If players tie, nobody takes it. Once a mountain is sealed, the shrines around it are free to move on to the next one.
+6. **Seal mountains.** Each mountain touches exactly 3 spaces. The moment all 3 hold shrines, the mountain is sealed: whoever has the most shrines there takes the mountain tile off the board (3 points). If players tie, the tile goes back to the box. Once a mountain is sealed, the shrines around it are free to move on to the next one.
 
 **Collecting.** Each earth disc you collect moves that land type's marker up 1 on your player board, to a maximum of 25. The disc then goes back to the supply. Pearls you keep.
 

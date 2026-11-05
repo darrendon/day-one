@@ -26,7 +26,6 @@ body{
     repeating-linear-gradient(92deg, rgba(0,0,0,.06) 0 2px, transparent 2px 9px, rgba(255,255,255,.035) 9px 10px, transparent 10px 23px),
     repeating-linear-gradient(88deg, rgba(0,0,0,.05) 0 1px, transparent 1px 41px),
     linear-gradient(180deg, var(--table) 0%, var(--table-2) 100%);
-  background-attachment: fixed;
   color:var(--ink); font-family:var(--f-body); font-size:15px; line-height:1.45;
   padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px));
   padding-block:18px 32px;
@@ -40,13 +39,13 @@ header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;jus
 .brand h1{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5vw,48px);margin:0;line-height:1;color:var(--table-ink);letter-spacing:.01em;text-shadow:0 2px 0 rgba(0,0,0,.25);text-wrap:balance}
 .brand p{margin:6px 0 0;color:var(--table-dim);font-size:14px;max-width:62ch}
 .top-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{background:var(--paper);border:1.5px solid var(--ink);border-radius:8px;padding:8px 14px;font-weight:600;font-size:14px;color:var(--ink);box-shadow:0 2px 0 var(--ink)}
+.btn{background:linear-gradient(180deg,#fbf6ea,#efe5cf);border:1.5px solid #5b4528;border-radius:8px;padding:8px 14px;font-weight:700;font-size:14px;color:var(--ink);box-shadow:0 3px 0 #5b4528}
 .btn:hover{background:#fffaf0}
-.btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--ink)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:#123f50;box-shadow:0 2px 0 #123f50}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #5b4528}
+.btn.primary{background:linear-gradient(180deg,#2a7f9a,#1d6c86);color:var(--accent-ink);border-color:#123f50;box-shadow:0 3px 0 #123f50}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .board-wrap{min-width:0}
-.board-card{background:#16384a;border-radius:10px;padding:12px;box-shadow:0 14px 28px var(--shadow), 0 2px 0 rgba(0,0,0,.25), inset 0 0 0 3px #0f2a39, inset 0 0 0 5px #d8c08a}
+.board-card{background:#16384a;border-radius:6px;padding:12px;box-shadow:0 22px 34px rgba(25,12,2,.45), 0 3px 0 #0b1f2a, 0 5px 0 #c9b382, 0 7px 0 #9c875a, inset 0 0 0 3px #0f2a39, inset 0 0 0 5px #d8c08a}
 #board{display:block;width:100%;height:auto;touch-action:manipulation;user-select:none;border-radius:4px}
 .board-notes{background:var(--paper);border-radius:6px;margin-top:10px;padding:2px 4px 8px}
 .hexinfo{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;min-height:30px;padding:8px 6px 2px;font-size:13px;color:var(--ink-dim)}
@@ -55,10 +54,61 @@ header.top{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:flex-end;jus
 .dot{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:inset 0 -2px 0 rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.25)}
 .dot.core{background:radial-gradient(circle at 35% 30%, #fff3b8 0 14%, #f0b92a 42%, #a8740c 100%);box-shadow:0 0 0 1px #6e4a06}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:6px 6px 0;font-size:12.5px;color:var(--ink-dim)}
+.app{max-width:1240px}
+@media (min-width:921px){.board-wrap{grid-column:1;grid-row:2}aside.console{grid-column:2;grid-row:2 / span 2}.refcard{grid-column:1;grid-row:3;margin-top:-10px}}
+.board-wrap{position:relative}
 .legend b{color:var(--ink);font-weight:700}
 aside.console{display:flex;flex-direction:column;gap:14px;min-width:0}
 .panel{background:var(--paper);border-radius:8px;padding:14px 16px;box-shadow:0 8px 18px var(--shadow), 0 1px 0 rgba(0,0,0,.2)}
 .panel h2{font-family:var(--f-display);font-size:17px;font-weight:400;letter-spacing:.02em;color:var(--ink);margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+/* the turn card: a reference card lying on the table */
+.turncard{position:relative;background:linear-gradient(180deg,#fbf6ea,#f1e8d4);border-radius:12px;padding:14px 16px 15px;box-shadow:0 10px 20px var(--shadow), 0 1px 0 rgba(0,0,0,.25);display:flex;flex-direction:column;gap:8px}
+.turncard::before{content:"";position:absolute;inset:5px;border:1px solid #d8c8a4;border-radius:8px;pointer-events:none}
+.turncard h2{font-family:var(--f-display);font-size:19px;font-weight:400;margin:0;color:var(--ink)}
+.turncard .round{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+.turncard .who{font-family:var(--f-display);font-size:23px;display:flex;align-items:flex-end;gap:10px;line-height:1}
+.turncard .who small{font-family:var(--f-body);font-size:13px;color:var(--ink-faint)}
+.turncard .hint{color:var(--ink-dim);font-size:14px}
+.turncard .steps{display:flex;gap:16px;font-size:14px;color:var(--ink-dim)}
+.turncard .steps b{color:var(--ink);font-size:17px;font-family:var(--f-display);font-weight:400;margin-left:3px}
+/* the supply: piles of wooden discs on the table */
+.tray{background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.08));border-radius:12px;padding:8px 10px 10px;box-shadow:inset 0 2px 6px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.08)}
+.traylab{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--table-dim);padding:0 2px 2px}
+.tray.live .traylab::after{content:" · tap a pile to take earth";letter-spacing:.04em;text-transform:none;font-weight:600}
+.supply{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.pile{display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:0;border-radius:10px;padding:4px 2px 5px;color:var(--table-ink);font-size:12px}
+.pile svg{display:block;transition:transform .12s}
+.pile .pl{font-weight:600;color:var(--table-dim)}
+.pile b{font-family:var(--f-display);font-weight:400;font-size:15px;line-height:1}
+.pile:disabled{cursor:default}
+.tray.live .pile:not(:disabled):hover svg{transform:translateY(-3px)}
+.tray.live .pile:disabled{opacity:.45}
+.pile.on{background:rgba(255,246,222,.16);box-shadow:inset 0 0 0 2px #f2c14e}
+.pile.on svg{transform:translateY(-4px)}
+/* player mats: cardboard boards with an edge in the player's colour */
+.mats{display:flex;flex-direction:column;gap:12px}
+.mat{position:relative;background:linear-gradient(180deg,#efe3c7,#e4d4b1);border-radius:10px;padding:10px 12px 10px;box-shadow:0 8px 16px var(--shadow), 0 2px 0 #b9a174, inset 0 5px 0 var(--pc), inset 0 6px 0 var(--pe);display:flex;flex-direction:column;gap:7px;transition:transform .15s, box-shadow .15s}
+.mat.active{transform:translateY(-3px);box-shadow:0 14px 24px var(--shadow), 0 2px 0 #b9a174, inset 0 5px 0 var(--pc), inset 0 6px 0 var(--pe), 0 0 0 3px #f2c14e}
+.mathead{display:flex;align-items:flex-end;gap:8px;padding-top:4px}
+.mathead .pname{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.mathead .pname small{font-weight:500;color:var(--ink-faint)}
+.turnflag{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:#f2c14e;color:#3b2a08;border-radius:4px;padding:2px 6px;box-shadow:0 1px 0 #9c7a1c}
+.ptotal{font-family:var(--f-display);font-size:22px;line-height:1;min-width:38px;height:38px;border-radius:50%;display:inline-grid;place-items:center;background:#f8f1e1;box-shadow:inset 0 0 0 2px var(--pc), 0 2px 0 rgba(0,0,0,.2);font-variant-numeric:tabular-nums}
+.pboard{background:#f6eedb;border:1px solid #cdb98c;border-radius:6px;padding:4px 6px 3px}
+.pboard svg{display:block;max-width:330px}
+.tableau{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12.5px;color:var(--ink-dim)}
+.tok{display:inline-flex;align-items:center;gap:4px}
+.tok b{color:var(--ink);font-weight:800}
+.tok svg{display:block}
+.tok .none{color:var(--ink-faint);font-style:italic}
+/* printed reference card and rule booklets */
+.refcard{background:var(--paper);border-radius:8px;margin-top:12px;padding:4px 8px 10px;box-shadow:0 8px 16px var(--shadow)}
+.booklet{background:linear-gradient(90deg,#e8dcc2 0 10px,var(--paper) 10px);border-radius:6px 10px 10px 6px;padding:12px 16px 12px 24px;box-shadow:0 8px 16px var(--shadow)}
+.booklet summary{cursor:pointer;font-family:var(--f-display);font-size:17px;color:var(--ink);list-style:none}
+.booklet summary::-webkit-details-marker{display:none}
+.booklet summary::after{content:" +";color:var(--ink-faint)}
+.booklet[open] summary::after{content:" –"}
+.booklet .log{margin-top:8px}
 .turn{display:flex;flex-direction:column;gap:8px}
 .turn .who{font-family:var(--f-display);font-size:22px;font-weight:400;display:flex;align-items:center;gap:10px}
 .turn .hint{color:var(--ink-dim);font-size:14px}
@@ -152,7 +202,7 @@ details.designer summary{cursor:pointer;font-weight:700}
       <p>Raise islands out of an empty sea. Carry earth, drop a layer on every space you cross, and claim the land where your god comes to rest.</p>
     </div>
     <div class="top-actions">
-      <button class="btn" id="btnRules" type="button">How to play</button>
+      <button class="btn" id="btnRules" type="button">Rulebook</button>
       <button class="btn primary" id="btnNew" type="button">New game</button>
     </div>
   </header>
@@ -160,35 +210,21 @@ details.designer summary{cursor:pointer;font-weight:700}
   <section class="board-wrap">
     <div class="board-card">
       <svg id="board" role="img" aria-label="Map"></svg>
-      <div class="board-notes">
-        <div class="hexinfo" id="hexinfo">Hover a space to read its stack, bottom to top.</div>
-        <div class="legend" id="legend"></div>
-      </div>
     </div>
   </section>
 
   <aside class="console">
-    <div class="panel turn" id="turnPanel"></div>
-    <div class="panel preview" id="previewPanel" hidden></div>
-    <div class="panel">
-      <h2>Gods</h2>
-      <div class="players" id="players"></div>
-    </div>
-    <div class="panel">
-      <h2>Shared supply</h2>
+    <div class="turncard" id="turnPanel"></div>
+    <div class="turncard preview" id="previewPanel" hidden></div>
+    <div class="tray" role="group" aria-label="Supply">
+      <div class="traylab">Supply</div>
       <div class="supply" id="supply"></div>
     </div>
-    <div class="panel">
-      <h2>Land race · tracks</h2>
-      <div class="tablewrap"><table class="race" id="race"></table></div>
-    </div>
-    <div class="panel">
-      <h2>Log</h2>
-      <ul class="log" id="log"></ul>
-    </div>
-    <div class="panel">
-      <details class="rules" id="rules">
-        <summary>How to play</summary>
+    <div class="mats" id="players"></div>
+    <table id="race" hidden></table>
+    <details class="booklet"><summary>Game log</summary><ul class="log" id="log"></ul></details>
+    <details class="booklet rules" id="rules">
+        <summary>Rulebook</summary>
         <p>Each player is an island god raising a new world out of an empty sea. Your god carries stacks of earth across the waves, drops a layer on every space it crosses, and plants shrines where it comes to rest.</p>
         <p><strong>Setup:</strong> the board is a tight 6 × 7 sea with 10 mountains printed on the corners where three spaces meet (3 points each) and printed pearl spots (shuffle the 1–3 pearls onto them). With 2 or 3 players, play only inside the dashed zone and leave the shallows outside it empty. Pick any player colours. Each player takes a god, a scoring cube and their shrines (7 / 6 / 5 / 4 with 2 / 3 / 4 / 5 players). The board has 5 numbered start spaces: the first player starts on 1, the second on 2, and so on, with one shrine on the space and their god standing on it. Put a grey stone shrine on every numbered space nobody is using inside the play area (2 players: spaces 3 and 5; 3 players: space 5; 4 players: space 5; 5 players: none). Put earth discs of each of the 5 land types in the supply: 10 each with 4 or 5 players (the full box, 50 discs), 8 with 3, 7 with 2. Each player also takes a player board and puts a marker at 0 on each of its five land-type tracks.</p>
         <ol>
@@ -197,7 +233,7 @@ details.designer summary{cursor:pointer;font-weight:700}
           <li><strong>Offerings:</strong> a disc that would drop onto a rival's shrine is an offering. Drop it on top of their shrine (their island grows). They move that land type's marker up 1 on their player board, and you move your cube 1 space along the score track. Pearls offered go straight to them. Give rivals what they don't need. A disc dropped on a stone shrine is an offering too: you score 1, nobody's track moves, and a pearl dropped there goes back to the box.</li>
           <li><strong>Eruption (once per turn):</strong> if your god lands on a stack of 2 or more discs with no shrine, and at least one disc in it is the land type you took this turn, the island erupts. Collect its top disc, add 1 disc of your land type, and travel again.</li>
           <li><strong>Raise a shrine:</strong> collect the top disc where your god lands (an empty space gives nothing), then slip a shrine under your god. If all your shrines are already on the sea, move one of them here instead; the stack it stood on stays behind.</li>
-          <li><strong>Seal mountains:</strong> each mountain touches exactly 3 spaces. The moment all 3 hold shrines, it is sealed: the player with the most shrines there takes its 3 points for good. If players tie, nobody takes it. After that, those shrines are free to move on to the next mountain.</li>
+          <li><strong>Seal mountains:</strong> each mountain touches exactly 3 spaces. The moment all 3 hold shrines, it is sealed: the player with the most shrines there takes the mountain tile off the board (3 points). If players tie, the tile goes back to the box. After that, those shrines are free to move on to the next mountain.</li>
         </ol>
         <p><strong>Collecting:</strong> whenever you collect an earth disc (the top disc where your god lands, or the top disc in an eruption), move that land type's marker up 1 on your player board (tracks stop at 25) and put the disc back in the supply. Pearls you keep.</p>
         <p><strong>Game end (the sea is full):</strong> earth only leaves the supply for the sea, and only comes back when someone collects it, so the supply slowly empties as the islands grow. The game ends the moment a player cannot gather earth, because no land type in the supply has enough discs.</p>
@@ -209,7 +245,12 @@ details.designer summary{cursor:pointer;font-weight:700}
           <li><strong>Tiebreak:</strong> most discs collected.</li>
         </ul>
       </details>
-    </div>
+  </aside>
+
+  <div class="refcard">
+    <div class="hexinfo" id="hexinfo">Hover a space to read its stack, bottom to top.</div>
+    <div class="legend" id="legend"></div>
+  </div>
   </aside>
 </div>
 
@@ -695,11 +736,18 @@ function mountainSVG(k, t, st, dim) {   // a corner mountain: printed where its 
   if (gone) g += `<path d="M${(x - 5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 5).toFixed(1)} ${(y + 5).toFixed(1)} M${(x + 5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x - 5).toFixed(1)} ${(y + 5).toFixed(1)}" stroke="${INK}" stroke-width="1.8" stroke-linecap="round" opacity=".75"/>`;
   return g + `</g>`;
 }
-function mountainsSVG(s) {
+function mountainsSVG(s) {   // printed corner marks everywhere; a mountain tile sits on each mark in play until it is sealed and taken away
   if (!BOARD.tight || !TIGHT.mountains) return "";
-  const PW = score(s).planetWinner; let g = "";
-  TIGHT.mountains.forEach((t, j) => { const k = 100 + j; g += mountainSVG(k, t, PW[k], !(BOARD.mtn && BOARD.mtn[k])); });
+  let g = "";
+  TIGHT.mountains.forEach((t, j) => {
+    const k = 100 + j, x = t.reduce((a, c) => a + cells[c].x, 0) / 3, y = t.reduce((a, c) => a + cells[c].y, 0) / 3;
+    g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="#0d3a4c" fill-opacity=".35" stroke="${CHALK}" stroke-opacity=".4" stroke-width="1" stroke-dasharray="1.6 1.8" pointer-events="none"/>`;
+    if (BOARD.mtn && BOARD.mtn[k] && !(k in s.sealed)) g += mountainSVG(k, t, null, false);
+  });
   return g;
+}
+function mtnTileSVG(w) {   // a mountain tile as it sits on a player mat
+  return `<svg viewBox="-11 -11 22 22" width="22" height="22" aria-hidden="true"><circle r="10" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52" stroke="#2f3d29" stroke-width=".8" stroke-linejoin="round"/><path d="M-3.2 -2.5 L-1.5 -5 L.2 -2.6 Z" fill="#f4f0e6"/></svg>`;
 }
 function render(dispState) {
   const s = dispState || UI.disp || G; const svg = $("board");
@@ -741,7 +789,7 @@ function render(dispState) {
     base += `<g data-i="${i}" class="cell"><polygon points="${hexPoints(c.x, c.y, R)}" fill="#ffffff" fill-opacity=".001" stroke="${CHALK}" stroke-opacity=".32" stroke-width="1"/>`;
     if (BOARD.tight) base += startNumSVG(c, i, false);
     base += stackSVG(c, s, i) + `</g>`;
-    if (legal.has(i)) top += `<polygon class="legal" points="${hexPoints(c.x, c.y, R - 2.5)}" fill="none" stroke="${CHALK}" stroke-width="${UI.origin === i ? 3.4 : 2.4}" pointer-events="none"/>`;
+    if (legal.has(i)) top += `<polygon points="${hexPoints(c.x, c.y, R - 3)}" fill="#ffffff" fill-opacity="${UI.origin === i ? .08 : .14}" stroke="${CHALK}" stroke-opacity=".85" stroke-width="1.6" pointer-events="none"/>`;
   }
   base += mountainsSVG(s);
   for (let q = 0; q < s.P; q++) {
@@ -777,22 +825,22 @@ function render(dispState) {
 }
 function freeSVG() {
   const F = UI.F, D = F.D, pc = PCOL[G.cur].col; let out = "";
-  const line = (ids, op, w) => `<polyline points="${ids.map(i => cells[i].x.toFixed(1) + "," + cells[i].y.toFixed(1)).join(" ")}" fill="none" stroke="${INK}" stroke-opacity="${op}" stroke-width="${w}" stroke-dasharray="${op > .5 ? "" : "4 4"}" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>`;
+  const line = (ids, op, w) => `<polyline points="${ids.map(i => cells[i].x.toFixed(1) + "," + cells[i].y.toFixed(1)).join(" ")}" fill="none" stroke="#f6f1e4" stroke-opacity="${op}" stroke-width="${w}" stroke-dasharray="0.1 6" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>`;   // the god's wake: a line of dots
   F.segs.forEach((g, j) => { if (F.phase !== "fly" && j === F.segs.length - 1) out += line([g.from, ...g.path], .8, 3); else out += line([g.from, ...g.path], .3, 2); });
   if (F.phase === "fly" && F.path.length) out += line([F.from, ...F.path], .8, 3);
   const left = F.phase === "fly" ? F.cnt - F.path.length : 0;
   for (const x of UI.next) {
     const c = cells[x];
-    if (F.phase === "pull") { out += `<g pointer-events="none"><polygon points="${hexPoints(c.x, c.y, R - 4)}" fill="none" stroke="#f2c14e" stroke-width="2.8" stroke-dasharray="4 3"/><text x="${c.x}" y="${(c.y - 17).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="800" fill="#f2c14e" stroke="${INK}" stroke-width="2.4" paint-order="stroke">MOVE</text></g>`; continue; }
-    if (F.phase === "target" || left === 1) { out += `<g pointer-events="none"><polygon points="${hexPoints(c.x, c.y, R - 4)}" fill="none" stroke="${CHALK}" stroke-width="2.6" stroke-dasharray="2 3"/><circle cx="${c.x.toFixed(1)}" cy="${(c.y - 21).toFixed(1)}" r="3.4" fill="${pc}" stroke="${PCOL[G.cur].edge}" stroke-width="1"/></g>`; continue; }
+    if (F.phase === "pull") { out += `<polygon points="${hexPoints(c.x, c.y, R - 3)}" fill="#f2c14e" fill-opacity=".18" stroke="#f2c14e" stroke-width="1.8" pointer-events="none"/>`; continue; }
+    if (F.phase === "target" || left === 1) { out += `<polygon points="${hexPoints(c.x, c.y, R - 3)}" fill="${pc}" fill-opacity=".22" stroke="${pc}" stroke-opacity=".95" stroke-width="2" pointer-events="none"/>`; continue; }   // where your god can come to rest
     const gift = D.owner[x] >= 0 && D.owner[x] !== G.cur;
-    out += `<polygon points="${hexPoints(c.x, c.y, R - 4)}" fill="none" stroke="${gift ? "#ff9b7a" : CHALK}" stroke-width="${gift ? 2.6 : 2.2}" stroke-dasharray="4 3" pointer-events="none"/>`;
+    out += `<polygon points="${hexPoints(c.x, c.y, R - 3)}" fill="${gift ? "#ffb08f" : "#ffffff"}" fill-opacity="${gift ? .2 : .13}" stroke="${gift ? "#ffb08f" : CHALK}" stroke-opacity=".85" stroke-width="1.6" pointer-events="none"/>`;
   }
   const head = F.phase === "fly" ? (F.path.length ? F.path[F.path.length - 1] : F.from) : (F.phase === "target" ? F.final : (F.target !== null ? F.target : F.final));
-  if (UI.pull !== undefined) { const pc2 = cells[UI.pull]; out += `<g pointer-events="none"><polygon points="${hexPoints(pc2.x, pc2.y, R - 4)}" fill="none" stroke="#f2c14e" stroke-width="2.8"/><text x="${pc2.x}" y="${(pc2.y - 17).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="9" font-weight="800" fill="#f2c14e" stroke="${INK}" stroke-width="2.4" paint-order="stroke">MOVES</text></g>`; }
+  if (UI.pull !== undefined) { const pc2 = cells[UI.pull]; out += `<polygon points="${hexPoints(pc2.x, pc2.y, R - 3)}" fill="#f2c14e" fill-opacity=".35" stroke="#f2c14e" stroke-width="2.4" pointer-events="none"/>`; }
   const c = cells[head];
-  out += `<polygon points="${hexPoints(c.x, c.y, R - 1.5)}" fill="none" stroke="${INK}" stroke-width="3.2" pointer-events="none"/>`;
-  if (left > 0) out += `<g pointer-events="none"><circle cx="${(c.x - 18).toFixed(1)}" cy="${(c.y - 8).toFixed(1)}" r="7.5" fill="${CHALK}" stroke="${INK}" stroke-width="1.4"/><text x="${(c.x - 18).toFixed(1)}" y="${(c.y - 4.6).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" fill="${INK}">${left}</text></g>`;
+  out += heldSVG(c, F.phase === "fly" ? F.hand.slice(F.path.length) : [], G.cur, stackTop(D, head), F.phase === "fly");
+  if (false) out += `<g pointer-events="none"><circle cx="${(c.x - 18).toFixed(1)}" cy="${(c.y - 8).toFixed(1)}" r="7.5" fill="${CHALK}" stroke="${INK}" stroke-width="1.4"/><text x="${(c.x - 18).toFixed(1)}" y="${(c.y - 4.6).toFixed(1)}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" fill="${INK}">${left}</text></g>`;
   return out;
 }
 function zoneLineSVG() {   // the printed border of the 2-3 god zone (shown on every game, as it would be on the board)
@@ -843,6 +891,16 @@ function godSVG(x, footY, q, scale = 1) {   // a wooden god figure: rounded body
     `<path d="M${X(-4.2)} ${Y(-19.6)} L${X(-2.6)} ${Y(-23)} L${X(-.9)} ${Y(-20.4)} L${X(0)} ${Y(-24)} L${X(.9)} ${Y(-20.4)} L${X(2.6)} ${Y(-23)} L${X(4.2)} ${Y(-19.6)}" fill="none" stroke="${pc.edge}" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>` +
     `<path d="M${X(-2.4)} ${Y(-9)} C${X(-3.2)} ${Y(-5)} ${X(-3)} ${Y(-2)} ${X(-2.2)} ${Y(-.6)}" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="1.2" stroke-linecap="round"/></g>`;
 }
+function heldSVG(c, discs, q, baseTop, lifted) {   // the stack your god carries, held just above the space it's over, god on top
+  const step = discs.length > 5 ? 2.4 : 3; let y = baseTop - (lifted ? 4 : 0), out = "";
+  if (lifted) out += `<ellipse cx="${c.x}" cy="${(baseTop - 0.6).toFixed(1)}" rx="9" ry="2.6" fill="#0a2633" opacity=".25"/>`;
+  for (const d of discs) {
+    if (d.c === CORE) out += discSVG(c.x, y, 9.5, 3.8, step, "url(#gGold)", "#a8740c", "#6e4a06");
+    else { const e = ELEM[d.c]; out += discSVG(c.x, y, 9.5, 3.8, step, e.col, e.edge, e.edge); }
+    y -= step;
+  }
+  return `<g pointer-events="none">${out}${godSVG(c.x, y + (discs.length ? step : 0) + 1, q, .92)}</g>`;
+}
 function shipSVG(c, q, topY) { return godSVG(c.x, (topY ?? c.y + STACK_BASE) + 1, q); }
 function trailSVG(e) {
   const D = UI.disp || G; let out = "";
@@ -874,8 +932,7 @@ function playerBoardSVG(q) {   // a printed player board: one 0-25 track per lan
     g += `<ellipse cx="${cx.toFixed(1)}" cy="${(y + ch / 2 + 1.1).toFixed(1)}" rx="3.9" ry="2" fill="${e.edge}"/><ellipse cx="${cx.toFixed(1)}" cy="${(y + ch / 2).toFixed(1)}" rx="3.9" ry="2.9" fill="${e.col}" stroke="${e.edge}" stroke-width=".7"/>`;
     g += `<text x="${(x0 + 26 * (cw + gx) + 4).toFixed(1)}" y="${(y + ch - 1).toFixed(1)}" font-family="Figtree, sans-serif" font-size="8.5" font-weight="800" fill="${INK}">${v}${v > 20 ? "" : ""}</text>`;
   });
-  const pr = `<span class="hg"><span class="dot core"></span><b>${G.cores[q]}</b></span>`;
-  return `<svg viewBox="0 0 ${W2.toFixed(0)} ${H2.toFixed(0)}" width="100%" role="img" aria-label="Land-type tracks">${g}</svg><span class="pearls">Pearls ${pr}</span>`;
+  return `<svg viewBox="0 0 ${W2.toFixed(0)} ${H2.toFixed(0)}" width="100%" role="img" aria-label="Land-type tracks">${g}</svg>`;
 }
 function renderLegend() {
   const sw = (w, h, vb, body) => `<svg width="${w}" height="${h}" viewBox="${vb}" aria-hidden="true">${body}</svg>`;
@@ -884,7 +941,7 @@ function renderLegend() {
     `<span class="el"><span class="dot core"></span><span>Pearl <b>1–3</b></span></span>` +
     `<span class="el">${sw(16, 22, "-8 -26 16 30", godSVG(0, 0, 0))}<span>God: stands on your newest shrine and travels from there</span></span>` +
     `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, PCOL[0].col, PCOL[0].edge, PCOL[0].edge))}<span>Shrine: claims the space under it</span></span>` +
-    (BOARD.mtn ? `<span class="el">${sw(20, 20, "-10 -10 20 20", `<circle r="9.5" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52"/>`)}<span>Mountain <b>${MTN_VAL}</b>: sits where 3 spaces meet. The moment all 3 hold shrines it is sealed and the most shrines there takes it (a tie: nobody). Ringed in the winner's colour.</span></span>` : `<span class="el">${sw(18, 16, "-9 -9 18 16", `<ellipse cx="0" cy="3" rx="8.5" ry="4" fill="#e7d39b"/><path d="M-6 4 L-1 -7 L1 -4 L2.5 -6 L6 4 Z" fill="#5f7a52"/>`)}<span>Sacred peak <b>5</b>: at the end, the most shrines around it takes it (a tie scores nothing). Flag = current leader.</span></span>`) +
+    (BOARD.mtn ? `<span class="el">${sw(20, 20, "-10 -10 20 20", `<circle r="9.5" fill="#efe4c4" stroke="#7a6640" stroke-width="1.2"/><path d="M-6.5 4 L-1.5 -5 L1.2 -1 L3 -3 L6.5 4 Z" fill="#5f7a52"/>`)}<span>Mountain tile <b>${MTN_VAL}</b>: sits where 3 spaces meet. The moment all 3 hold shrines, the most shrines there takes the tile off the board (a tie: back to the box).</span></span>` : `<span class="el">${sw(18, 16, "-9 -9 18 16", `<ellipse cx="0" cy="3" rx="8.5" ry="4" fill="#e7d39b"/><path d="M-6 4 L-1 -7 L1 -4 L2.5 -6 L6 4 Z" fill="#5f7a52"/>`)}<span>Sacred peak <b>5</b>: at the end, the most shrines around it takes it (a tie scores nothing). Flag = current leader.</span></span>`) +
     (CFG.giftPts ? `<span class="el">${sw(14, 14, "-1 -1 10 10", cubeSVG(0, 0, 0, 8))}<span>Score track: move your cube 1 space for every offering you make. Each space is a point.</span></span>` : "") +
     (BOARD.tight ? `<span class="el">${sw(14, 15, "-7 -7.5 14 15", startBadge(0, 0, 1))}<span>Start spaces: first player on 1, second on 2, and so on. Player colours don't matter.</span></span>` +
       `<span class="el">${sw(22, 14, "-11 -6 22 14", hexPlateSVG(0, 0, 10, 3.5, "#8e897c", "#4a463d", "#4a463d"))}<span>Stone shrine: on every numbered space nobody uses. Discs dropped on it are offerings (1 point to you).</span></span>` : "") +
@@ -895,35 +952,50 @@ function handControls() {
   return `<div class="hand"><span class="lab">${k ? `Add ${k} disc${k > 1 ? "s" : ""} of` : "Land to add"}</span>
     <div class="elems" role="group" aria-label="Element">${ELEM.map((e, c) => `<button type="button" class="elbtn" data-el="${c}" aria-pressed="${HAND.c === c}" ${G.supply[c] < (k || 1) ? "disabled" : ""}><span class="dot" style="background:${e.col}"></span>${e.name}<i>${G.supply[c]}</i></button>`).join("")}</div></div>`;
 }
+function pileSVG(c, n) {   // a pile of wooden discs in the supply
+  const e = ELEM[c], step = 3.4; let y = 52, g = `<ellipse cx="22" cy="${y + 5}" rx="15" ry="4.4" fill="#2a1a0c" opacity=".28"/>`;
+  for (let j = 0; j < n; j++) { g += discSVG(22, y, 13, 5, step, e.col, e.edge, e.edge); y -= step; }
+  if (!n) g += `<ellipse cx="22" cy="${y}" rx="13" ry="5" fill="none" stroke="#b49a6c" stroke-width="1.2" stroke-dasharray="2 2"/>`;
+  return `<svg viewBox="0 0 44 62" width="44" height="62" aria-hidden="true">${g}</svg>`;
+}
+function godIcon(q, h = 30) { return `<svg viewBox="-9 -27 18 30" width="${(h * .6).toFixed(0)}" height="${h}" aria-hidden="true">${godSVG(0, 0, q, 1)}</svg>`; }
+function shrineIcon(q, n) {   // the shrines a player still has in hand, as little tiles
+  const pc = PCOL[q]; let g = "";
+  for (let j = 0; j < n; j++) g += hexPlateSVG(8 + j * 15, 9, 6, 2.6, pc.col, pc.edge, pc.edge);
+  return `<svg viewBox="0 0 ${Math.max(16, 2 + n * 15)} 15" width="${Math.max(16, 2 + n * 15)}" height="15" aria-hidden="true">${g}</svg>`;
+}
 function renderPanels() {
   const sc = score(G); const p = G.cur, pl = CFG.players[p];
   let hint = "";
   if (G.over) hint = "Game over.";
   else if (pl.bot) hint = "Thinking…";
   else if (UI.mode === "pick") hint = "Your god can't travel from where it stands this turn, so pick one of your other shrines (outlined) to start from." ||  G.ship[p] < 0 ? "Launch from your start space." : (UI.legal.size && [...UI.legal].every(x => nbl[G.ship[p]].includes(x)) ? "Pick a space outlined in white, next to your god." : "You can't launch next to your god, so you can launch next to any of your shrines (outlined in white).");
-  else if (UI.mode === "aim" && UI.free) hint = UI.F.phase === "pull" ? "You're out of shrines: pick one of yours to move under your god." : UI.F.phase === "fly" ? "Move one space at a time: click a ringed neighbour. Each step drops your bottom disc; a red ring means it becomes an offering to that rival. You can't enter a space twice on one journey (after an eruption you may cross your earlier path, but not stop on it). Your god lands on the last step, where you raise a shrine." : UI.F.phase === "target" ? "That space is taken. Plant on one of the highlighted neighbouring stacks." : "Check the plan, then go.";
+  else if (UI.mode === "aim" && UI.free && UI.F.phase === "fly" && !UI.clicks.length) hint = "Take earth from the supply (tap a pile), then move your god one space at a time. It carries the stack and drops the bottom disc on every space it enters.";
+  else if (UI.mode === "aim" && UI.free) hint = UI.F.phase === "pull" ? "You're out of shrines: pick one of yours to move under your god." : UI.F.phase === "fly" ? "Move one space at a time: tap a ringed space. Each step drops your bottom disc; a coral ring is a rival's shrine, so that disc becomes an offering. You can't enter the same space twice in a turn. Your god lands on the last step (spaces tinted in your colour), where you raise a shrine." : UI.F.phase === "target" ? "That space is taken. Plant on one of the highlighted neighbouring stacks." : "Check the plan, then go.";
   else if (UI.mode === "aim") hint = (UI.stage ? `Launching again from ${coord(UI.origin)}: pick any heading. ` : "") + "Rings mark where your god can land. ↻ lands on a stack and launches it again; a filled ring raises a shrine. Discs ringed in red are offerings to rivals.";
   const showHand = !G.over && !pl.bot && (UI.mode === "pick" || (UI.mode === "aim" && (UI.free ? !UI.clicks.length : UI.stage === 0)));
-  $("turnPanel").innerHTML = `<span class="round">ROUND ${G.round} · TURN ${G.turns + 1}</span>
-    <div class="who"><span class="pchip" style="background:${PCOL[p].col}"></span>${pname(p)}${pl.bot ? ' <small style="font-family:var(--f-body);font-size:13px;color:var(--ink-faint)">bot</small>' : ""}</div>
-    <div class="hint">${hint}</div>${showHand ? handControls() : ""}`;
-  if (showHand) document.querySelectorAll("#turnPanel [data-el]").forEach(b => b.onclick = () => { HAND.c = +b.dataset.el; refreshHand(); });
-  $("players").innerHTML = CFG.players.map((pp, q) => `<div class="prow ${q === G.cur && !G.over ? "active" : ""}">
-      <span class="pchip" style="background:${PCOL[q].col}"></span>
-      <span class="pname">${esc(pp.name)} ${pp.bot ? "<small>bot</small>" : ""}</span>
-      <span class="ptotal">${sc.total[q]}</span>
-      ${CFG.recycle ? `<span class="pboard" aria-label="Player board">${playerBoardSVG(q)}</span>` : `<span class="hangar" aria-label="Hangar">${ELEM.map((e, k) => `<span class="hg"><span class="dot" style="background:${e.col}"></span><b>${G.hangar[q][k]}</b></span>`).join("")}<span class="hg"><span class="dot core"></span><b>${G.cores[q]}</b></span></span>`}
-      <span class="pmeta"><span>Lands <b>${sc.el[q]}</b></span><span>Pearls <b>${G.cores[q]}</b></span><span>Mountains <b>${sc.pl[q]}</b></span><span>Captured <b>${G.caps[q]}</b></span>${CFG.giftPts ? `<span>Offerings given <b>${sc.gp[q]}</b></span>` : ""}<span>Offerings in <b>${G.gifted[q]}</b></span><span>Shrines <b>${G.outs[q].length}${CFG.outposts ? "/" + CFG.outposts : ""}</b></span></span>
-    </div>`).join("");
-  $("supply").innerHTML = ELEM.map((e, k) => `<span class="hg"><span class="dot" style="background:${e.col}"></span>${e.name} <b>${G.supply[k]}</b></span>`).join("");
-  let t = `<tr><th>Land</th>${CFG.players.map((pp, q) => `<th><span class="pchip" style="width:12px;height:12px;border-width:1.5px;background:${PCOL[q].col};vertical-align:-1px"></span></th>`).join("")}</tr>`;
-  ELEM.forEach((e, k) => {
-    const L = sc.leaders[k];
-    t += `<tr><td><span class="el"><span class="dot" style="background:${e.col}"></span>${e.name}</span></td>` +
-      CFG.players.map((pp, q) => { const v = G.hangar[q][k]; const lead = L.first.includes(q), sec = L.second.includes(q);
-        return `<td class="${lead ? "lead" : ""}" style="${lead ? `background:${e.col};color:${e.txt}` : sec ? `box-shadow:inset 0 0 0 1.5px ${e.col}` : ""}">${v || "·"}</td>`; }).join("") + `</tr>`;
-  });
-  $("race").innerHTML = t;
+  $("turnPanel").innerHTML = `<span class="round">Round ${G.round} · turn ${G.turns + 1}</span>
+    <div class="who">${godIcon(p, 30)}<span>${pname(p)}${pl.bot ? ' <small>bot</small>' : ""}</span></div>
+    <div class="hint">${hint}</div>`;
+  const kNeed = UI.origin !== null && UI.mode === "aim" ? fillAmount(G, UI.origin) : 1;
+  $("supply").innerHTML = ELEM.map((e, c) => {
+    const pick = showHand, dis = pick && G.supply[c] < kNeed, on = pick && HAND.c === c;
+    return `<button type="button" class="pile${on ? " on" : ""}" data-el="${c}" ${pick ? `aria-pressed="${on}"` : 'tabindex="-1"'} ${dis || !pick ? "disabled" : ""} aria-label="${e.name}: ${G.supply[c]} left">${pileSVG(c, G.supply[c])}<span class="pl">${e.name}</span><b>${G.supply[c]}</b></button>`;
+  }).join("");
+  document.querySelector(".tray").classList.toggle("live", showHand);
+  if (showHand) document.querySelectorAll("#supply [data-el]").forEach(b => b.onclick = () => { HAND.c = +b.dataset.el; refreshHand(); });
+  $("players").innerHTML = CFG.players.map((pp, q) => {
+    const won = Object.keys(G.sealed).filter(k => +k >= 100 && G.sealed[k] === q).length, left = CFG.outposts ? Math.max(0, CFG.outposts - G.outs[q].length) : 0;
+    return `<section class="mat${q === G.cur && !G.over ? " active" : ""}" style="--pc:${PCOL[q].col};--pe:${PCOL[q].edge}" aria-label="${esc(pp.name)}'s player board">
+      <div class="mathead">${godIcon(q, 26)}<span class="pname">${esc(pp.name)}${pp.bot ? " <small>bot</small>" : ""}</span>${q === G.cur && !G.over ? '<span class="turnflag">Turn</span>' : ""}<span class="ptotal" title="Score so far">${sc.total[q]}</span></div>
+      ${CFG.recycle ? `<div class="pboard">${playerBoardSVG(q)}</div>` : ""}
+      <div class="tableau">
+        <span class="tok" title="Pearls"><span class="dot core"></span><b>${G.cores[q]}</b></span>
+        <span class="tok" title="Mountain tiles taken">${won ? Array.from({length: won}, () => mtnTileSVG()).join("") : '<span class="none">no mountains</span>'}</span>
+        <span class="tok" title="Shrines still in hand">${CFG.outposts ? (left ? shrineIcon(q, left) : '<span class="none">all shrines out</span>') : ""}</span>
+        <span class="tok" title="Offerings made (cube on the score track)"><b>${sc.gp[q] || 0}</b>&nbsp;offerings</span>
+      </div>
+    </section>`; }).join("");
   $("log").innerHTML = LOG.slice(-40).reverse().map(l => `<li><span class="t">${l.t}</span><span>${l.html}</span></li>`).join("");
   renderPreview(sc);
 }
@@ -979,7 +1051,7 @@ function renderFreePanel(scBefore) {
   if (F.phase === "done") {
     const m = freeMove(), r = applyMove(G, p, m, false), sa = score(r.ns), d = sa.total[p] - scBefore.total[p];
     const others = CFG.players.map((pp, q) => q === p ? "" : `${esc(pp.name)} <b>${sa.total[q] - scBefore.total[q] >= 0 ? "+" : ""}${sa.total[q] - scBefore.total[q]}</b>`).filter(Boolean).join(" · ");
-    box.innerHTML = `<h2 style="margin:0">Your turn</h2>
+    box.innerHTML = `<h2>Ready to raise your shrine</h2>
       <dl>
         <dt>Starts from</dt><dd>${coord(m.o)}</dd>
         <dt>You add</dt><dd>${m.k}${m.segs.length > 1 ? ` + ${UI.F.refill} on the eruption` : ""} ${ELEM[m.c].name}</dd>
@@ -1001,13 +1073,9 @@ function renderFreePanel(scBefore) {
       : F.phase === "target" ? `Your god reached ${coord(F.final)}, which is taken. Pick a highlighted neighbouring stack to plant on.`
       : left === 1 ? "Next step: your god lands. Land on a stack of 2 or more with no shrine" + (F.relays < CFG.relay ? " containing " + ELEM[HAND.c].name + " to make it erupt: you take its top disc, add 1 of your land type and fly again" : " to collect its top disc") + ". A single disc is taken; an empty space gives nothing."
       : `Next step drops ${discDot(F.hand[F.path.length])} ${discName(F.hand[F.path.length])}.`;
-    box.innerHTML = `<h2 style="margin:0">${F.relays ? "After the eruption" : "Travelling"}${F.relays ? ` (took ${discName(F.bonusCap)}, added ${F.refill} ${ELEM[HAND.c].name})` : ""}</h2>
-      <dl>
-        <dt>Starts from</dt><dd>${coord(F.from)}</dd>
-        ${F.relays ? "" : `<dt>You add</dt><dd>${F.k} ${ELEM[HAND.c].name}</dd>`}
-        ${F.phase === "fly" ? `<dt>Carrying (bottom first)</dt><dd><span class="dots">${carry}</span></dd><dt>Steps left</dt><dd>${left}</dd>` : ""}
-        <dt>Offerings so far</dt><dd>${F.gifts}</dd>
-      </dl>
+    box.innerHTML = `<h2>${F.relays ? "Eruption!" : "Travelling"}</h2>
+      ${F.relays ? `<div class="delta">You took ${discDot(F.bonusCap)} ${discName(F.bonusCap)} and added ${F.refill} ${ELEM[HAND.c].name}. Travel again.</div>` : ""}
+      ${F.phase === "fly" ? `<div class="steps"><span>Steps left <b>${left}</b></span><span>Offerings <b>${F.gifts}</b></span></div>` : ""}
       <div class="delta">${next}</div>
       <div class="row">${btns}</div>`;
   }
@@ -1152,18 +1220,23 @@ function animate(D, startIdx, steps, done) {
     else if (s.t === "pull") D.owner[s.i] = -1;
   };
   if (!delay) { steps.forEach(apply); UI.anim = null; done(); return; }
-  let k = 0; const path = [startIdx]; const gen = GEN; let flash = null;
+  let k = 0; const path = [startIdx]; const gen = GEN; let flash = null, hand = [], lifted = false;
   UI.mode = "anim"; UI.anim = {trail: ""};
   const tick = () => {
     if (gen !== GEN) return;
     if (k >= steps.length) { UI.anim = null; done(); return; }
-    const s = steps[k++]; apply(s);
+    const s = steps[k++];
+    if (s.t === "lift") { hand = D.st[s.i].slice(); lifted = true; }
+    apply(s);
+    if (s.t === "drop" || s.t === "gift") hand.shift();
+    if (s.t === "move") { hand = []; lifted = false; }
     if (s.t === "lift" && s.i !== path[path.length - 1]) path.push(s.i);
     if (s.t === "drop" || s.t === "gift" || s.t === "move") path.push(s.i);
     flash = s.t === "gift" ? s.i : null;
     const pts = path.map(i => cells[i].x.toFixed(1) + "," + cells[i].y.toFixed(1)).join(" ");
     const head = cells[path[path.length - 1]];
-    UI.anim.trail = `<polyline points="${pts}" fill="none" stroke="${INK}" stroke-opacity=".75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>` + godSVG(head.x, head.y + 12, G.cur) +
+    const hi = path[path.length - 1];
+    UI.anim.trail = `<polyline points="${pts}" fill="none" stroke="#f6f1e4" stroke-opacity=".8" stroke-width="3" stroke-dasharray="0.1 6" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>` + heldSVG(head, hand, G.cur, stackTop(D, hi), lifted && hand.length > 0) +
       (flash !== null ? `<text x="${cells[flash].x}" y="${cells[flash].y - 16}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" fill="#ffd2c2" stroke="${INK}" stroke-width="2.6" paint-order="stroke" pointer-events="none">offering</text>` : "");
     render(D);
     setTimeout(tick, s.t === "noop" ? 0 : (s.t === "drop" || s.t === "gift" || s.t === "move") ? delay : delay * 2);
